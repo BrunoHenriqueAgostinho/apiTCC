@@ -3,10 +3,6 @@
 {
     "cpf": "11111111111"
 }
-
-{
-    "cpf": "22222222222"
-}
 */
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");

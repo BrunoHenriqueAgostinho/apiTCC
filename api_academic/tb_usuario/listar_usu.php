@@ -1,22 +1,13 @@
 <?php
-/*
-{
-    "cpf": "11111111111"
-}
 
-{
-    "cpf": "22222222222"
-}
-*/
-header('Content-Type: application/json');
+header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
-
 if($_SERVER["REQUEST_METHOD"] == "GET"){
     require("../conexao.php");
     $json = file_get_contents("php://input");
     $deco = json_decode($json);
-    $cpf = $deco->cpf;
-
+    $nome = $deco->nome;
+    
     $sql = "SELECT 
                 U.cpf_usuario,
                 U.nome_usuario, 
@@ -35,12 +26,11 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
                 tb_contato C 
             WHERE 
                 U.Tb_Contato_codigo_contato = C.codigo_contato 
-                AND  
-                    cpf_usuario = " . $cpf;
-        
+            AND  
+                U.nome_usuario like '%" . $nome . "%'";
     $resultado = mysqli_query($conexao, $sql);
     if ($resultado) {
-        $dados = $resultado->fetch_array(MYSQLI_ASSOC);
+        $dados = $resultado->fetch_all(MYSQLI_ASSOC);
         http_response_code(200);
         echo json_encode($dados, JSON_UNESCAPED_UNICODE);
     } else {

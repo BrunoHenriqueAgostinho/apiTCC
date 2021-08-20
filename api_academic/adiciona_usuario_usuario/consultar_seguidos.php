@@ -1,7 +1,12 @@
 <?php
-//?cpf=11111111111
+/*
+{
+    "cpf": "11111111111"
+}
+*/
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
+
 if($_SERVER["REQUEST_METHOD"] == "GET"){
     require("../conexao.php");
     $json = file_get_contents("php://input");
@@ -9,20 +14,16 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $cpf = $deco->cpf;
 
     $sql = "SELECT 
-        cpf_usuario,
-        nome_usuario, 
-        senha_usuario,
-        descricao_usuario,
-        foto_usuario,
-        dtCadastro_usuario,
-        tema_usuario,
-        status_usuario,
-        Tb_Contato_codigo_contato 
-        from tb_usuario where cpf_usuario = " . $cpf;
-    
+                seguidor_usuario,
+                seguido_usuario
+            FROM 
+                adiciona_usuario_usuario 
+            WHERE 
+                seguidor_usuario = " . $cpf;
+        
     $resultado = mysqli_query($conexao, $sql);
-    if($resultado) {
-        $dados = $resultado->fetch_array(MYSQLI_ASSOC);
+    if ($resultado) {
+        $dados = $resultado->fetch_all(MYSQLI_ASSOC);
         http_response_code(200);
         echo json_encode($dados, JSON_UNESCAPED_UNICODE);
     } else {
