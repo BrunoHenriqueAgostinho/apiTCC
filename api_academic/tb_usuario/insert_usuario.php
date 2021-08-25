@@ -20,9 +20,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     //$timezone = new DateTimeZone('America/Sao_Paulo');
     $dtCadastro = date('Y-m-d');//new date('now', $timezone);
 
-    $comando = "insert into tb_usuario (cpf_usuario, nome_usuario, senha_usuario, dtCadastro_usuario, Tb_Contato_codigo_contato) values
+    $sql = "insert into tb_usuario (cpf_usuario, nome_usuario, senha_usuario, dtCadastro_usuario, Tb_Contato_codigo_contato) values
     ('$cpf', '$nome', '$senha', '$dtCadastro', '$contato')";
-    $resultado = mysqli_query($conexao, $comando);
+    $resultado = mysqli_query($conexao, $sql);
     if ($resultado) {
         http_response_code(201);
         echo json_encode(["mensagem" => "Usuário inserido com Sucesso"]);
