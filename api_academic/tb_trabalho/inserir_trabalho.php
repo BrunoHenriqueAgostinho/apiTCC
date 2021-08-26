@@ -9,7 +9,7 @@
     "dtPublicacao": "",
     "avaliacao": "",
     "modelo": "",
-    "cnpj": ""
+    "cnpj": "" 
 }
 */
 header("Content-Type: application/json");

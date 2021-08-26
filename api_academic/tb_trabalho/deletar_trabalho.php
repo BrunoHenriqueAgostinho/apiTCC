@@ -8,7 +8,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $deco = json_decode($json);
     $codigo = $deco->codigo;
 
-    $sql = "DELETE FROM tb_trabalho WHERE codigo_trabalho = $codigo";
+    $sql = "DELETE FROM tb_trabalho WHERE codigo_trabalho = $codigo"; 
     $resultado = mysqli_query($conexao, $sql);
     if ($resultado) {
         http_response_code(200);

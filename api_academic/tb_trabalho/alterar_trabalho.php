@@ -11,6 +11,7 @@
 	"cnpj": "11111111111111"
 }
 */
+
 header("Content-Type: application/json");
 header("Access-Controlo-Allow-Origin: *");
 if($_SERVER["REQUEST_METHOD"] == "PUT"){

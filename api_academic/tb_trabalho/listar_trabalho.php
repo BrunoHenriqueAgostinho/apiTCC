@@ -25,7 +25,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
                 tb_trabalho
             WHERE 
                 nome_trabalho like '%" . $nome . "%'";
-    $resultado = mysqli_query($conexao, $sql);
+    $resultado = mysqli_query($conexao, $sql); 
     if ($resultado) {
         $dados = $resultado->fetch_all(MYSQLI_ASSOC);
         http_response_code(200);
