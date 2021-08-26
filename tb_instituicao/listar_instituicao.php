@@ -1,4 +1,8 @@
 <?php
+/*
+{
+    "nome": "Devisate"
+}*/
 
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
@@ -9,22 +13,11 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $nome = $deco->nome;
     
     $sql = "SELECT 
-                codigo_trabalho,
-                nome_trabalho,
-                descricao_trabalho,
-                arquivo_trabalho,
-                formatacao_trabalho,
-                finalizado_trabalho,
-                dtCriacao_trabalho,
-                dtAlteracao_trabalho,
-                dtPublicacao_trabalho,
-                avaliacao_trabalho,
-                Tb_Modelo_codigo_modelo,
-                Tb_instituicao_cnpj_instituicao
+                I.*
             FROM 
-                tb_trabalho
+                tb_instituicao I
             WHERE 
-                nome_trabalho like '%" . $nome . "%'";
+                I.nome_instituicao like '%" . $nome . "%'";
     $resultado = mysqli_query($conexao, $sql);
     if ($resultado) {
         $dados = $resultado->fetch_all(MYSQLI_ASSOC);
