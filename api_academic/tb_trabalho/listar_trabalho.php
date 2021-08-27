@@ -26,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
             WHERE 
                 nome_trabalho like '%" . $nome . "%'";
     $resultado = mysqli_query($conexao, $sql); 
-    if ($resultado) {
+    if ($resultado) { 
         $dados = $resultado->fetch_all(MYSQLI_ASSOC);
         http_response_code(200);
         echo json_encode($dados, JSON_UNESCAPED_UNICODE);
