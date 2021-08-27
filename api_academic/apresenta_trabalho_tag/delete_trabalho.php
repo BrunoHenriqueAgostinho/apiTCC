@@ -12,13 +12,13 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $deco = json_decode($json);
     $trabalho = $deco->trabalho;
     $tag = $deco->tag;
-    
-    $sql = "INSERT apresenta_trabalho_tag (Tb_Trabalho_codigo_trabalho,Tb_Tag_codigo_tag) VALUES (".$trabalho.",".$tag.")";
 
+    $sql = "DELETE FROM apresenta_trabalho_tag WHERE Tb_Trabalho_codigo_trabalho=".$trabalho." AND Tb_Tag_codigo_tag =".$tag;
     $resultado = mysqli_query($conexao, $sql);
     if ($resultado) {
-        http_response_code(201);
-        echo json_encode(["mensagem" => "Tag inserida com Sucesso ao trabalho"]);
+        http_response_code(200);
+        $dados = ["mensagem" => "Tag deletada com sucesso do trabalho"];
+        echo json_encode($dados);
     } else {
         header("HTTP/1.1 500 Erro no SQL");
         echo json_encode(["erro" => "Erro SQL: " . $conexao->error]);
