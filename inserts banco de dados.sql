@@ -55,7 +55,6 @@ INSERT INTO tb_tag (codigo_tag, categoria_tag) VALUES
 (9, "Gestão");
 
 -- Modelos
--- POR QUE SÓ FUNCIONA QUANDO TEM CNPJ??
 INSERT INTO tb_modelo (nome_modelo, arquivo_modelo, formatacao_modelo, dtCriacao_modelo, descricao_modelo, Tb_Instituicao_cnpj_instituicao) VALUES
 ("Resumo Expandido", "Título: Resumo: Palavras-Chave: Introdução: Objetivos: Relevância do estudo: Metodologia: Resultados: Conclusão: Referências:","8pt", "2021-08-18", "Modelo para o TCC do 3°ETIM DS", "11111111111111"),
 ("Resumo", "Título: Resumo: Referências:", "9pt", "2021-08-18", "", null);
@@ -63,3 +62,11 @@ INSERT INTO tb_modelo (nome_modelo, arquivo_modelo, formatacao_modelo, dtCriacao
 -- Trabalho
 INSERT INTO tb_trabalho (nome_trabalho, descricao_trabalho, arquivo_trabalho, formatacao_trabalho, finalizado_trabalho, dtCriacao_trabalho, dtAlteracao_trabalho, dtPublicacao_trabalho, avaliacao_trabalho, Tb_Modelo_codigo_modelo, Tb_Instituicao_cnpj_instituicao) VALUES
 ("TCC Academic", "Trabalho de Conclusão de Curso do ETIM DS da Etec Antonio Devisate", "arquivo", "formatação", 0, "2021-08-26", "2021-08-26", null, null, 1, null);
+
+-- Reações dos trabalhos
+INSERT INTO reage_usuario_trabalho (Tb_Usuario_cpf_usuario, Tb_Trabalho_codigo_trabalho) VALUES
+("11111111111", 2);
+INSERT INTO reage_usuario_trabalho (Tb_Usuario_cpf_usuario, Tb_Trabalho_codigo_trabalho) VALUES
+("22222222222", 2);
+INSERT INTO reage_usuario_trabalho (Tb_Usuario_cpf_usuario, Tb_Trabalho_codigo_trabalho) VALUES
+("44444444444", 5);
