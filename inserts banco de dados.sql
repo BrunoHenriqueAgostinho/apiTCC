@@ -62,11 +62,18 @@ INSERT INTO tb_modelo (nome_modelo, arquivo_modelo, formatacao_modelo, dtCriacao
 -- Trabalho
 INSERT INTO tb_trabalho (nome_trabalho, descricao_trabalho, arquivo_trabalho, formatacao_trabalho, finalizado_trabalho, dtCriacao_trabalho, dtAlteracao_trabalho, dtPublicacao_trabalho, avaliacao_trabalho, Tb_Modelo_codigo_modelo, Tb_Instituicao_cnpj_instituicao) VALUES
 ("TCC Academic", "Trabalho de Conclusão de Curso do ETIM DS da Etec Antonio Devisate", "arquivo", "formatação", 0, "2021-08-26", "2021-08-26", null, null, 1, null);
+INSERT INTO tb_trabalho (nome_trabalho, descricao_trabalho, arquivo_trabalho, formatacao_trabalho, finalizado_trabalho, dtCriacao_trabalho, dtAlteracao_trabalho, dtPublicacao_trabalho, avaliacao_trabalho, Tb_Modelo_codigo_modelo, Tb_Instituicao_cnpj_instituicao) VALUES
+("Resumo", "Resumo para o 3°ETIM DS", "arquivo", "formatação", 0, "2021-08-26", "2021-08-26", null, null, 1, null);
 
 -- Reações dos trabalhos
 INSERT INTO reage_usuario_trabalho (Tb_Usuario_cpf_usuario, Tb_Trabalho_codigo_trabalho) VALUES
-("11111111111", 2);
+("11111111111", 1);
+INSERT INTO reage_usuario_trabalho (Tb_Usuario_cpf_usuario, Tb_Trabalho_codigo_trabalho) VALUES
+("22222222222", 1);
+INSERT INTO reage_usuario_trabalho (Tb_Usuario_cpf_usuario, Tb_Trabalho_codigo_trabalho) VALUES
+("44444444444", 1);
 INSERT INTO reage_usuario_trabalho (Tb_Usuario_cpf_usuario, Tb_Trabalho_codigo_trabalho) VALUES
 ("22222222222", 2);
 INSERT INTO reage_usuario_trabalho (Tb_Usuario_cpf_usuario, Tb_Trabalho_codigo_trabalho) VALUES
-("44444444444", 5);
+("44444444444", 2);
+

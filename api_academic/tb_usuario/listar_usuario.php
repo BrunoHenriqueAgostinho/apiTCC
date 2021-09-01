@@ -1,4 +1,9 @@
 <?php
+/*
+{
+	"pesquisa": "henrique"
+}
+*/
 
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
@@ -6,7 +11,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     require("../conexao.php");
     $json = file_get_contents("php://input");
     $deco = json_decode($json);
-    $nome = $deco->nome;
+    $pesquisa = $deco->pesquisa;
     
     $sql = "SELECT 
                 U.cpf_usuario,
@@ -27,7 +32,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
             WHERE 
                 U.Tb_Contato_codigo_contato = C.codigo_contato 
             AND  
-                U.nome_usuario like '%" . $nome . "%'";
+                U.nome_usuario like '%" . $pesquisa . "%'";
     $resultado = mysqli_query($conexao, $sql);
     if ($resultado) {
         $dados = $resultado->fetch_all(MYSQLI_ASSOC);
@@ -35,7 +40,10 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
         echo json_encode($dados, JSON_UNESCAPED_UNICODE);
     } else {
         header("HTTP/1.1 500 Erro no SQL");
-        echo json_encode(["erro" => "Erro SQL: " . $conexao->error]);
+        echo json_encode(["erro" => "Erro ao pesquisar por usuários."]);
     }
+} else {
+    header("HTTP/1.1 401 Request Method Incorreto");
+    echo json_encode(["erro" => "O método de solicitação está incorreto."]);
 }
 ?>

@@ -1,4 +1,11 @@
 <?php
+/*
+{
+	"email": "emailaleatorio@gmail.com",
+	"telefoneFixo": "12345",
+	"telefoneCelular": "54321"
+}
+*/
 
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
@@ -10,15 +17,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $telefoneFixo = $deco->telefoneFixo;
     $telefoneCelular = $deco->telefoneCelular;
 
-    $sql = "INSERT INTO tb_contato (email_contato, telefoneFixo_contato, telefoneCelular_contato) VALUES
-                ('$email', '$telefoneFixo', '$telefoneCelular')";
-    $resultado = mysqli_query($conexao, $sql);
-    if ($resultado) {
-        http_response_code(201);
-        echo json_encode(["mensagem" => "Contato inserido com Sucesso"]);
+    $sql1 = "SELECT 
+                *
+            FROM 
+                tb_contato 
+            WHERE 
+                email_contato = '$email'";
+    $resultado1 = mysqli_query($conexao, $sql1);
+    $contador = mysqli_num_rows($resultado1);
+    if ($contador == 0){
+        $sql2 = "INSERT INTO tb_contato (email_contato, telefoneFixo_contato, telefoneCelular_contato) VALUES
+                    ('$email', '$telefoneFixo', '$telefoneCelular')";
+        $resultado2 = mysqli_query($conexao, $sql2);
+        if ($resultado2) {
+            http_response_code(201);
+            echo json_encode(["mensagem" => "Contato inserido com Sucesso"]);
+        } else {
+            header("HTTP/1.1 500 Erro no SQL");
+            echo json_encode(["erro" => "Erro ao inserir contato"]);
+        }
     } else {
-        header("HTTP/1.1 500 Erro no SQL");
-        echo json_encode(["erro" => "Erro ao Inserir " . $conexao->error]);
+        header("HTTP/1.1 500 Registro já existente");
+        echo json_encode(["erro" => "Esse email já foi utilizado."]);
     }
+} else {
+    header("HTTP/1.1 401 Request Method Incorreto");
+    echo json_encode(["erro" => "O método de solicitação está incorreto."]);
 }
 ?>
