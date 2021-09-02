@@ -1,4 +1,7 @@
 <?php
+/*
+
+*/
 
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
@@ -9,19 +12,38 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $cpf_seguidor = $deco->cpf_seguidor;
     $cpf_seguido = $deco->cpf_seguido;
 
-    $sql = "DELETE FROM adiciona_usuario_usuario 
+    $sql1 = "SELECT 
+                seguidor_usuario,
+                seguido_usuario
+            FROM 
+                adiciona_usuario_usuario 
             WHERE 
-                seguidor_usuario = '$cpf_seguidor' 
+                seguidor_usuario = '$cpf_seguidor'
             AND
-                seguido_usuario = '$cpf_seguido'"; 
-    $resultado = mysqli_query($conexao, $sql);
-    if ($resultado) {
-        http_response_code(200);
-        $dados = ["mensagem" => "Deixou de Seguir"];
-        echo json_encode($dados);
+                seguido_usuario = '$cpf_seguido'";
+    $resultado1 = mysqli_query($conexao, $sql1);
+    $contador1 = mysqli_num_rows($resultado1);
+    if ($contador1 == 0) {
+        header("HTTP/1.1 201 Amigo inexistente");
+        echo json_encode(["erro" => "Não existe esse amigo."]);
     } else {
-        header("HTTP/1.1 500 Erro no SQL");
-        echo json_encode(["erro" => "Erro SQL: " . $conexao->error]);
+        $sql2 = "DELETE FROM adiciona_usuario_usuario 
+                WHERE 
+                    seguidor_usuario = '$cpf_seguidor' 
+                AND
+                    seguido_usuario = '$cpf_seguido'"; 
+        $resultado2 = mysqli_query($conexao, $sql2);
+        if ($resultado2) {
+            http_response_code(200);
+            $dados = ["mensagem" => "Deixou de Seguir"];
+            echo json_encode($dados);
+        } else {
+            header("HTTP/1.1 500 Erro no SQL");
+            echo json_encode(["erro" => "Erro ao deletar amigo."]);
+        }
     }
+} else {
+    header("HTTP/1.1 401 Request Method Incorreto");
+    echo json_encode(["erro" => "O método de solicitação está incorreto."]);
 }
 ?>

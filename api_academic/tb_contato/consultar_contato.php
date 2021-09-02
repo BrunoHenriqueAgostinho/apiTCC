@@ -23,7 +23,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $contador = mysqli_num_rows($resultado);
     if ($contador == 0) {
         header("HTTP/1.1 500 Erro no SQL");
-        echo json_encode(["erro" => "Erro ao consultar contato"]);
+        echo json_encode(["erro" => "Erro ao consultar contato."]);
     } else {
         $dados = $resultado->fetch_array(MYSQLI_ASSOC);
         http_response_code(200);
