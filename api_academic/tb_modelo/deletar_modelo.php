@@ -1,4 +1,7 @@
 <?php
+/*
+
+*/
 
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
@@ -7,23 +10,33 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $json = file_get_contents("php://input");
     $deco = json_decode($json);
     $codigo = $deco->codigo;
-
-    $sql = "SET foreign_key_checks = 0";
-    $resultado = mysqli_query($conexao, $sql);
-
-    $sql = "DELETE FROM tb_modelo WHERE codigo_modelo = ".$codigo;
-    $resultado = mysqli_query($conexao, $sql);
-
-    if ($resultado) {
-        http_response_code(200);
-        $dados = ["mensagem" => "Modelo deletado com sucesso"];
-        echo json_encode($dados);
+    
+    $sql1 = "SELECT
+                *
+            FROM
+                tb_modelo
+            WHERE
+                codigo_modelo = $codigo";
+    $resultado1 = mysqli_query($conexao, $sql1);
+    $contador1 = mysqli_num_rows($resultado1);
+    if ($contador1 == 0){
+        header("HTTP/1.1 500 Registro inexistente.");
+        echo json_encode(["erro" => "Esse modelo não existe."]);
     } else {
-        header("HTTP/1.1 500 Erro no SQL");
-        echo json_encode(["erro" => "Erro SQL: " . $conexao->error]);
-    }
+        $sql2 = "DELETE FROM tb_modelo WHERE codigo_modelo = $codigo";
+        $resultado2 = mysqli_query($conexao, $sql2);
 
-    $sql = "SET foreign_key_checks = 1";
-    $resultado = mysqli_query($conexao, $sql);
+        if ($resultado2) {
+            http_response_code(200);
+            $dados = ["mensagem" => "Modelo deletado com sucesso"];
+            echo json_encode($dados);
+        } else {
+            header("HTTP/1.1 500 Erro no SQL");
+            echo json_encode(["erro" => "Erro ao deletar modelo."]);
+        }
+    }
+} else {
+    header("HTTP/1.1 401 Request Method Incorreto");
+    echo json_encode(["erro" => "O método de solicitação está incorreto."]);
 }
 ?>

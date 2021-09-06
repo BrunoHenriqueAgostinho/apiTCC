@@ -1,4 +1,10 @@
 <?php
+/*
+{
+	"cpf_seguidor": "44444444444",
+	"cpf_seguido": "33333333333"
+}
+*/
 
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
@@ -37,7 +43,9 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
                 FROM 
                     adiciona_usuario_usuario 
                 WHERE 
-                    seguido_usuario = '$cpf_seguido' AND seguidor_usuario = '$cpf_seguidor'";
+                    seguido_usuario = '$cpf_seguido' 
+                AND 
+                    seguidor_usuario = '$cpf_seguidor'";
         $resultado3 = mysqli_query($conexao, $sql3);
         if ($resultado3) {
             $dados = $resultado3->fetch_array(MYSQLI_ASSOC);
