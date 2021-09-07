@@ -77,3 +77,12 @@ INSERT INTO reage_usuario_trabalho (Tb_Usuario_cpf_usuario, Tb_Trabalho_codigo_t
 INSERT INTO reage_usuario_trabalho (Tb_Usuario_cpf_usuario, Tb_Trabalho_codigo_trabalho) VALUES
 ("44444444444", 2);
 
+-- Membros dos trabalhos
+INSERT INTO desenvolve_usuario_trabalho (Tb_Usuario_cpf_usuario, Tb_Trabalho_codigo_trabalho, cargo_usuario) VALUES
+("11111111111", 1, 1),
+("22222222222", 1, 1),
+("33333333333", 1, 2);
+INSERT INTO desenvolve_usuario_trabalho (Tb_Usuario_cpf_usuario, Tb_Trabalho_codigo_trabalho, cargo_usuario) VALUES
+("33333333333", 2, 1),
+("44444444444", 2, 3),
+("11111111111", 2, 2);
