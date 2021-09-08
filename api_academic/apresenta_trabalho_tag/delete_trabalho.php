@@ -13,15 +13,34 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $trabalho = $deco->trabalho;
     $tag = $deco->tag;
 
-    $sql = "DELETE FROM apresenta_trabalho_tag WHERE Tb_Trabalho_codigo_trabalho=".$trabalho." AND Tb_Tag_codigo_tag =".$tag;
-    $resultado = mysqli_query($conexao, $sql);
-    if ($resultado) {
-        http_response_code(200);
-        $dados = ["mensagem" => "Tag deletada com sucesso do trabalho"];
-        echo json_encode($dados);
+
+    $sql1 = "SELECT
+                *
+            FROM
+                apresenta_trabalho_tag
+            WHERE
+                Tb_Trabalho_codigo_trabalho = $trabalho
+            AND
+                Tb_Tag_codigo_tag = $tag";
+    $resultado1 = mysqli_query($conexao, $sql1);
+    $contador1 = mysqli_num_rows($resultado1);
+    if ($contador1 == 0) {
+        header("HTTP/1.1 500 Registro inexistente");
+        echo json_encode(["erro" => "Esse registro não existe."]);
     } else {
-        header("HTTP/1.1 500 Erro no SQL");
-        echo json_encode(["erro" => "Erro SQL: " . $conexao->error]);
+        $sql2 = "DELETE FROM apresenta_trabalho_tag WHERE Tb_Trabalho_codigo_trabalho = $trabalho AND Tb_Tag_codigo_tag = $tag";
+        $resultado2 = mysqli_query($conexao, $sql2);
+        if ($resultado2) {
+            http_response_code(200);
+            $dados = ["mensagem" => "Tag deletada com sucesso do trabalho"];
+            echo json_encode($dados);
+        } else {
+            header("HTTP/1.1 500 Erro no SQL");
+            echo json_encode(["erro" => "Erro ao deletar tag do trabalho."]);
+        }
     }
+} else {
+    header("HTTP/1.1 401 Request Method Incorreto");
+    echo json_encode(["erro" => "O método de solicitação está incorreto."]);
 }
 ?>

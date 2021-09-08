@@ -86,3 +86,15 @@ INSERT INTO desenvolve_usuario_trabalho (Tb_Usuario_cpf_usuario, Tb_Trabalho_cod
 ("33333333333", 2, 1),
 ("44444444444", 2, 3),
 ("11111111111", 2, 2);
+
+-- Apresenta_trabalho_tag
+INSERT INTO apresenta_trabalho_tag (Tb_Trabalho_codigo_trabalho, Tb_Tag_codigo_tag ) VALUES
+(1, 1),
+(1, 3),
+(1, 5),
+(1, 7),
+(1, 9),
+(2, 2),
+(2, 4),
+(2, 6),
+(2, 8);

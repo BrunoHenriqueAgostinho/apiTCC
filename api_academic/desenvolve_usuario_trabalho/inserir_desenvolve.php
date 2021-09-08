@@ -43,15 +43,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             header("HTTP/1.1 500 Trabalho Inexistente");
             echo json_encode(["erro" => "Esse trabalho não existe."]);
         } else {
-            $sql3 = "INSERT INTO desenvolve_usuario_trabalho (Tb_Usuario_cpf_usuario, Tb_Trabalho_codigo_trabalho, cargo_usuario) VALUES
-                    ('$cpf', $codigo, $cargo)";
+            $sql3 = "SELECT 
+                        * 
+                    FROM 
+                        desenvolve_usuario_trabalho
+                    WHERE 
+                        Tb_Usuario_cpf_usuario = '$cpf'
+                    AND
+                        Tb_Trabalho_codigo_trabalho = $codigo";
             $resultado3 = mysqli_query($conexao, $sql3);
-            if ($resultado3) {
-                http_response_code(201);
-                echo json_encode(["mensagem" => "Relação de desenvolvimento inserida com sucesso."]);
+            $contador3 = mysqli_num_rows($resultado3);
+            if ($contador3 == 0){
+                $sql4 = "INSERT INTO desenvolve_usuario_trabalho (Tb_Usuario_cpf_usuario, Tb_Trabalho_codigo_trabalho, cargo_usuario) VALUES
+                            ('$cpf', $codigo, $cargo)";
+                $resultado4 = mysqli_query($conexao, $sql4);
+                if ($resultado4) {
+                    http_response_code(201);
+                    echo json_encode(["mensagem" => "Relação de desenvolvimento inserida com sucesso."]);
+                } else {
+                    header("HTTP/1.1 500 Erro no SQL");
+                    echo json_encode(["erro" => "Erro ao inserir relação de desenvolvimento."]);
+                }
             } else {
-                header("HTTP/1.1 500 Erro no SQL");
-                echo json_encode(["erro" => "Erro ao inserir relação de desenvolvimento."]);
+                header("HTTP/1.1 201 Relação de desenvolvimento existente");
+                echo json_encode(["erro" => "Relação de desenvolvimento já existe."]);
             }
         }
     }
