@@ -25,25 +25,26 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
         header("HTTP/1.1 500 Registro inexistente.");
         echo json_encode(["erro" => "Esse usuário não existe."]);
     } else {
+        $sql2 = "DELETE FROM desenvolve_usuario_trabalho WHERE Tb_Usuario_cpf_usuario = '$cpf'";
+        $resultado2 = mysqli_query($conexao, $sql2);
 
-        $permisaoDeletar = "SET foreign_key_checks = 0";
-        $resultado2 = mysqli_query($conexao, $permisaoDeletar);
+        $sql3 = "DELETE FROM adiciona_usuario_usuario WHERE seguidor_usuario = '$cpf' OR seguido_usuario = '$cpf'";
+        $resultado3 = mysqli_query($conexao, $sql3);
 
-        $sql2 = "DELETE FROM 
-                    tb_usuario 
-                WHERE cpf_usuario = " . $cpf;
-        $resultado3 = mysqli_query($conexao, $sql2);
-        if ($resultado3) {
-            http_response_code(200);
-            $dados = ["mensagem" => "Usuário deletado com sucesso"];
-            echo json_encode($dados);
-        } else {
-            header("HTTP/1.1 500 Erro no SQL");
-            echo json_encode(["erro" => "Erro SQL: " . $conexao->error]);
-        }
+        $sql4 = "DELETE FROM reage_usuario_trabalho WHERE Tb_Usuario_cpf_usuario = '$cpf'";
+        $resultado4 = mysqli_query($conexao, $sql4);
 
-        $habilitarDeletar = "SET foreign_key_checks = 1";
-        $resultado4 = mysqli_query($conexao, $habilitarDeletar);
+        $dados1 = mysqli_fetch_array($resultado1);
+        $codigo = $dados1["Tb_Contato_codigo_contato"];
+
+        $sql5 = "DELETE FROM tb_usuario WHERE cpf_usuario = '$cpf'";
+        $resultado5 = mysqli_query($conexao, $sql5);
+
+        $sql6 = "DELETE FROM tb_contato WHERE codigo_contato = $codigo";
+        $resultado6 = mysqli_query($conexao, $sql6);
     }
+} else {
+    header("HTTP/1.1 401 Request Method Incorreto");
+    echo json_encode(["erro" => "O método de solicitação está incorreto."]);
 }
 ?>

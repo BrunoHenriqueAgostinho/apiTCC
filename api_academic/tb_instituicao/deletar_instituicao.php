@@ -25,14 +25,13 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
         header("HTTP/1.1 201 Instituição inexistente");
         echo json_encode(["erro" => "Não existe essa instituição."]);
     } else {
-        //errado
         $sql2 = "UPDATE tb_modelo
                     SET
                         Tb_Instituicao_cnpj_instituicao = null
                     WHERE
                         Tb_Instituicao_cnpj_instituicao = '$cnpj'";
         $resultado2 = mysqli_query($conexao, $sql2);
-        //certo
+        
         $sql3 = "UPDATE tb_trabalho
                     SET
                         Tb_Instituicao_cnpj_instituicao = null
@@ -45,7 +44,6 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 
         $dados1 = mysqli_fetch_array($resultado1);
         $codigo = $dados1["Tb_Contato_codigo_contato"];
-        echo $codigo;
 
         $sql5 = "DELETE FROM tb_instituicao WHERE cnpj_instituicao = '$cnpj'";
         $resultado5 = mysqli_query($conexao, $sql5);
