@@ -1,16 +1,17 @@
 <?php
-/*
-{
-    "cpf": "11111111111"
-}
+/*{
+    "cnpj": "22222222222222",
+	"estado": "São Paulo",
+    "cidade": "Marília",
+    "bairro": "Somenzari",
+    "rua": "Avenida Castro Alves",
+    "numero": "62",
+    "complemento": "",
+    "cep": "17506000"
+}*/
 
-{
-    "cpf": "22222222222"
-}
-*/
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
-
 if($_SERVER["REQUEST_METHOD"] == "PUT"){
     require("../conexao.php");
     $json = file_get_contents("php://input");
@@ -24,7 +25,20 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
     $complemento = $deco->complemento;
     $cep = $deco->cep;
 
-    $sql = "UPDATE tb_endereco 
+    $sql1 = "SELECT 
+                *
+            FROM 
+                tb_endereco
+            WHERE 
+                Tb_Instituicao_cnpj_instituicao = " . $cnpj;
+    $resultado1 = mysqli_query($conexao, $sql1);
+    $contador = mysqli_num_rows($resultado1);
+    if ($contador == 0) {
+        header("HTTP/1.1 500 Registro inexistente.");
+        echo json_encode(["erro" => "Esse endereço não existe."]);
+    } else {
+        $sql2 = "UPDATE 
+                tb_endereco 
             SET  
                 estado_endereco = '$estado', 
                 cidade_endereco = '$cidade', 
@@ -33,16 +47,19 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
                 numero_endereco = '$numero',
                 complemento_endereco = '$complemento', 
                 cep_endereco = '$cep'
-
             WHERE 
                 Tb_Instituicao_cnpj_instituicao = ".$cnpj;
         
-    $resultado = mysqli_query($conexao, $sql);
-    if ($resultado) {
-        http_response_code(201);
-        echo json_encode(["mensagem" => "Endereço alterado com Sucesso"]);
-    } else {
-        header("HTTP/1.1 500 Erro no SQL");
-        echo json_encode(["erro" => "Erro SQL: " . $conexao->error]);
+        $resultado2 = mysqli_query($conexao, $sql2);
+        if ($resultado2) {
+            http_response_code(201);
+            echo json_encode(["mensagem" => "Endereço alterado com sucesso"]);
+        } else {
+            header("HTTP/1.1 500 Erro no SQL");
+            echo json_encode(["erro" => "Erro SQL: " . $conexao->error]);
+        }
     }
+} else {
+    header("HTTP/1.1 401 Request Method Incorreto");
+    echo json_encode(["erro" => "O método de solicitação está incorreto."]);
 }

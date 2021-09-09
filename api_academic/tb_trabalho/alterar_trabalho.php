@@ -1,6 +1,5 @@
 <?php
-/*
-{
+/*{
 	"codigo": "3",
     "nome": "Trabalho",
     "descricao": "Descrição do Trabalho",
@@ -9,8 +8,7 @@
 	"finalizado": "0",
 	"avaliacao": "5",
 	"cnpj": "11111111111111"
-}
-*/
+}*/
 
 header("Content-Type: application/json");
 header("Access-Controlo-Allow-Origin: *");
@@ -18,7 +16,7 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
     require("../conexao.php");
     $json = file_get_contents("php://input");
     $deco = json_decode($json);
-    $codigo =$deco->codigo;
+    $codigo = $deco->codigo;
     $nome = $deco->nome;
     $descricao = $deco->descricao;
     $arquivo = $deco->arquivo;
@@ -28,7 +26,19 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
     $avaliacao = $deco->avaliacao;
     $cnpj = $deco->cnpj;
     
-    $sql = "UPDATE tb_trabalho 
+    $sql1 = "SELECT 
+                *
+            FROM 
+                tb_trabalho 
+            WHERE 
+                codigo_trabalho  = " . $codigo;
+    $resultado1 = mysqli_query($conexao, $sql1);
+    $contador = mysqli_num_rows($resultado1);
+    if ($contador == 0) {
+        header("HTTP/1.1 500 Registro inexistente.");
+        echo json_encode(["erro" => "Esse trabalho não existe."]);
+    } else {
+        $sql2 = "UPDATE tb_trabalho 
                 SET 
                     nome_trabalho = '$nome',
                     descricao_trabalho = '$descricao',
@@ -41,15 +51,20 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
                 WHERE
                     codigo_trabalho = '$codigo'";
 
-    $resultado = mysqli_query($conexao, $sql);
-    if ($resultado) {
-        http_response_code(200);
-        $data = ["mensagem" => "Trabalho alterado com sucesso"];
-        echo json_encode($data);
-    } else {
-        http_response_code(202);
-        $data = ["status" => "Erro", "msg"=> "Erro ao Alterar"];
-        echo json_encode($data);
+        $resultado2 = mysqli_query($conexao, $sql2);
+        if ($resultado2) {
+            http_response_code(200);
+            $data = ["mensagem" => "Trabalho alterado com sucesso"];
+            echo json_encode($data);
+        } else {
+            http_response_code(202);
+            $data = ["status" => "Erro", "msg"=> "Erro ao Alterar"];
+            echo json_encode($data);
+        }
     }
+} else {
+    header("HTTP/1.1 401 Request Method Incorreto");
+    echo json_encode(["erro" => "O método de solicitação está incorreto."]);
 }
+
 ?>
