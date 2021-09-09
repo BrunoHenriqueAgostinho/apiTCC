@@ -38,7 +38,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
             echo json_encode($dados);
         } else {
             header("HTTP/1.1 500 Erro no SQL");
-            echo json_encode(["erro" => "Erro ao deletar relação de desenvolvimento"]);
+            echo json_encode(["erro" => "Erro ao deletar relação de desenvolvimento."]);
         }
     }
 } else {

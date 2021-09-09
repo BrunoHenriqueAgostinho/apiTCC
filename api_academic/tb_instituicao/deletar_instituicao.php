@@ -1,4 +1,9 @@
 <?php
+/*
+{
+    "cnpj": "55555555555"
+}
+*/
 
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
@@ -8,35 +13,49 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $deco = json_decode($json);
     $cnpj = $deco->cnpj;
 
-    $sql = "DELETE
-            I.*, 
-            E.*,
-            C.* 
+    $sql1 = "SELECT
+                *
             FROM
-
-            tb_instituicao I,
-            tb_contato C,
-            tb_endereco E
-            
-            WHERE 
-            
-            I.Tb_Contato_codigo_contato = C.codigo_contato 
-            
-            AND
-	            
-            E.Tb_Instituicao_cnpj_instituicao = I.cnpj_instituicao
-
-            AND  
-            
-            I.cnpj_instituicao = " . $cnpj;
-    $resultado = mysqli_query($conexao, $sql);
-    if ($resultado) {
-        http_response_code(200);
-        $dados = ["mensagem" => "Instituição deletado com sucesso"];
-        echo json_encode($dados);
+                tb_instituicao
+            WHERE
+                cnpj_instituicao = '$cnpj'";
+    $resultado1 = mysqli_query($conexao, $sql1);
+    $contador1 = mysqli_num_rows($resultado1);
+    if ($contador1 == 0) {
+        header("HTTP/1.1 201 Instituição inexistente");
+        echo json_encode(["erro" => "Não existe essa instituição."]);
     } else {
-        header("HTTP/1.1 500 Erro no SQL");
-        echo json_encode(["erro" => "Erro SQL: " . $conexao->error]);
+        //errado
+        $sql2 = "UPDATE tb_modelo
+                    SET
+                        Tb_Instituicao_cnpj_instituicao = null
+                    WHERE
+                        Tb_Instituicao_cnpj_instituicao = '$cnpj'";
+        $resultado2 = mysqli_query($conexao, $sql2);
+        //certo
+        $sql3 = "UPDATE tb_trabalho
+                    SET
+                        Tb_Instituicao_cnpj_instituicao = null
+                    WHERE
+                        Tb_Instituicao_cnpj_instituicao = '$cnpj'";
+        $resultado3 = mysqli_query($conexao, $sql3);
+
+        $sql4 = "DELETE FROM tb_endereco WHERE Tb_Instituicao_cnpj_instituicao = $cnpj";
+        $resultado4 = mysqli_query($conexao, $sql4);
+
+        $dados1 = mysqli_fetch_array($resultado1);
+        $codigo = $dados1["Tb_Contato_codigo_contato"];
+        echo $codigo;
+
+        $sql5 = "DELETE FROM tb_instituicao WHERE cnpj_instituicao = '$cnpj'";
+        $resultado5 = mysqli_query($conexao, $sql5);
+        echo $conexao->error;
+
+        $sql6 = "DELETE FROM tb_contato WHERE codigo_contato = $codigo";
+        $resultado6 = mysqli_query($conexao, $sql6);
     }
+} else {
+    header("HTTP/1.1 401 Request Method Incorreto");
+    echo json_encode(["erro" => "O método de solicitação está incorreto."]);
 }
 ?>

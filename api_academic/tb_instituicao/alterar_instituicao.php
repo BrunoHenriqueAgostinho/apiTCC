@@ -1,9 +1,12 @@
 <?php
-/*{
-    "cnpj": "66666666666666",
-    "logotipo": "POPO",
+/*
+{
+    "cnpj": "55555555555",
+    "nome": "Escola Santa Antonieta",
+    "logotipo": null,
     "senha" : "1212121"
-}*/
+}
+*/
 
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
@@ -12,25 +15,42 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
     $json = file_get_contents("php://input");
     $deco = json_decode($json);
     $cnpj = $deco->cnpj;
+    $nome = $deco->nome;
     $senha = $deco->senha;
     $logotipo = $deco->logotipo;
 
-    $sql = "UPDATE tb_instituicao 
+    $sql1 = "SELECT
+                *
+            FROM
+                tb_instituicao
+            WHERE
+                cnpj_instituicao = '$cnpj'";
+    $resultado1 = mysqli_query($conexao, $sql1);
+    $contador1 = mysqli_num_rows($resultado1);
+    if ($contador1 == 0) {
+        header("HTTP/1.1 500 Registro inexistente.");
+        echo json_encode(["erro" => "Essa instituição não existe."]);
+    } else {
+        $sql2 = "UPDATE tb_instituicao 
                 SET 
+                    nome_instituicao = '$nome',
                     logotipo_instituicao = '$logotipo',
                     senha_instituicao = '$senha'
                 WHERE
                     cnpj_instituicao = '$cnpj'";
-
-    $resultado = mysqli_query($conexao, $sql);
-    if($resultado){
-        http_response_code(200);
-        $data = ["mensagem" => "Instituição alterada com sucesso"];
-        echo json_encode($data);
-    } else {
-        http_response_code(202);
-        $data = ["status" => "Erro", "msg"=> "Erro ao Alterar"];
-        echo json_encode($data);
+        $resultado2 = mysqli_query($conexao, $sql2);
+        if($resultado2){
+            http_response_code(200);
+            $data = ["mensagem" => "Instituição alterada com sucesso."];
+            echo json_encode($data);
+        } else {
+            http_response_code(202);
+            $data = ["status" => "Erro", "msg"=> "Erro ao Alterar"];
+            echo json_encode($data);
+        }
     }
+} else {
+    header("HTTP/1.1 401 Request Method Incorreto");
+    echo json_encode(["erro" => "O método de solicitação está incorreto."]);
 }
 ?>

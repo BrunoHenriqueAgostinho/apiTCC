@@ -22,16 +22,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     //$timezone = new DateTimeZone('America/Sao_Paulo');
     $dtCadastro = date('Y-m-d');//new date('now', $timezone);
 
-    $sql = "insert into tb_instituicao(cnpj_instituicao, nome_instituicao, logotipo_instituicao, senha_instituicao, dtCadastro_instituicao, Tb_Contato_codigo_contato) values
-    ('$cnpj', '$nome','$logotipo', '$senha', '$dtCadastro', '$contato')";
-    $resultado = mysqli_query($conexao, $sql);
-    if ($resultado) {
-        http_response_code(201);
-        echo json_encode(["mensagem" => "Instituição inserida com Sucesso"]);
+    $sql1 = "SELECT
+                *
+            FROM
+                tb_instituicao
+            WHERE
+                cnpj_instituicao = '$cnpj'";
+    $resultado1 = mysqli_query($conexao, $sql1);
+    $contador1 = mysqli_num_rows($resultado1);
+    if ($contador1 == 0) {
+        $sql2 = "INSERT INTO tb_instituicao(cnpj_instituicao, nome_instituicao, logotipo_instituicao, senha_instituicao, dtCadastro_instituicao, Tb_Contato_codigo_contato) VALUES
+                    ('$cnpj', '$nome','$logotipo', '$senha', '$dtCadastro', '$contato')";
+        $resultado2 = mysqli_query($conexao, $sql2);
+        if ($resultado2) {
+            http_response_code(201);
+            echo json_encode(["mensagem" => "Instituição inserida com sucesso."]);
+        } else {
+            header("HTTP/1.1 500 Erro no SQL");
+            echo json_encode(["erro" => "Erro ao Inserir instituição."]);
+        }
     } else {
-        header("HTTP/1.1 500 Erro no SQL");
-        echo json_encode(["erro" => "Erro ao Inserir " . $conexao->error]);
+        header("HTTP/1.1 500 Registro já existente");
+        echo json_encode(["erro" => "Esse CNPJ já está sendo utilizado."]);
     }
+} else {
+    header("HTTP/1.1 401 Request Method Incorreto");
+    echo json_encode(["erro" => "O método de solicitação está incorreto."]);
 }
-
 ?>
