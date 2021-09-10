@@ -1,10 +1,10 @@
 <?php
 /*
 {
-    "cpf": "55555555555",
+    "cpf": "55555455555",
     "nome": "Clebsvaldo",
     "senha": "abcdefghijk",
-    "contato": "3"
+    "email": "cleberstatroll@troll.com"
 }
 */
 
