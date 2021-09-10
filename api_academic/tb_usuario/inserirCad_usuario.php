@@ -29,7 +29,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $resultado1 = mysqli_query($conexao, $sql1);
     $contador = mysqli_num_rows($resultado1);
     if ($contador == 0){
-        
         $sql2 = "SELECT 
                 *
             FROM 
@@ -41,9 +40,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $contador2 = mysqli_num_rows($resultado2);
 
         if($contador2 == 0){
-            $sql3 = " INSERT INTO 
-                        tb_contato (email_contato) 
-                    VALUES 
+            $sql3 = "INSERT INTO tb_contato (email_contato) VALUES 
                         ('$email')";
             $resultado3 = mysqli_query($conexao, $sql3);
             if($resultado3){
@@ -54,16 +51,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         WHERE
                             email_contato LIKE '$email'";
                 $resultado4 = mysqli_query($conexao, $sql4);
-                $dados = mysqli_fetch_array($resultado4);
-                $contato = $dados["codigo_contato"];
 
                 if($resultado4){
+                    $dados = mysqli_fetch_array($resultado4);
+                    $contato = $dados["codigo_contato"];
                     $sql5 = "INSERT INTO tb_usuario (cpf_usuario, nome_usuario, senha_usuario, dtCadastro_usuario, Tb_Contato_codigo_contato) VALUES
-                    ('$cpf', '$nome', '$senha', '$dtCadastro', '$contato')";
+                                ('$cpf', '$nome', '$senha', '$dtCadastro', '$contato')";
                     $resultado5 = mysqli_query($conexao, $sql5);
                     if($resultado5){
                         http_response_code(201);
-                        echo json_encode(["mensagem" => "Usuario cadastrado com sucesso."]);
+                        echo json_encode(["mensagem" => "Usuário cadastrado com sucesso."]);
                     }else{
                         header("HTTP/1.1 500 Erro no SQL");
                         echo json_encode(["erro" => "Erro ao cadastrar usuário."]);
@@ -76,7 +73,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 header("HTTP/1.1 500 Erro de inserção");
                 echo json_encode(["erro" => "Erro ao cadastrar o email."]);
             }
-
         }else{
             header("HTTP/1.1 500 Registro já existente");
             echo json_encode(["erro" => "Esse email já está sendo utilizado por outra pessoa."]);
@@ -85,8 +81,5 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         header("HTTP/1.1 500 Registro já existente");
         echo json_encode(["erro" => "Esse CPF já está sendo utilizado."]);
     }
-} else {
-    header("HTTP/1.1 401 Request Method Incorreto");
-    echo json_encode(["erro" => "O método de solicitação está incorreto."]);
 }
 ?>

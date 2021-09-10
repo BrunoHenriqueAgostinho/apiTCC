@@ -8,6 +8,7 @@
     "senha" : "1212121"
 }
 */
+
 header("Content-Type: application/json");
 header("Access-Controlo-Allow-Origin: *");
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -39,18 +40,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $resultado2 = mysqli_query($conexao, $sql2);
             $contador2 = mysqli_num_rows($resultado2);
             if($contador2 == 0){
-                $sql3 = "INSERT INTO
-                            tb_contato (email_contato)
-                        VALUES
+                $sql3 = "INSERT INTO tb_contato (email_contato) VALUES
                             ('$email')";
                 $resultado3 = mysqli_query($conexao, $sql3);
                 if($resultado3){
                     $sql4 = "SELECT codigo_contato
                             FROM    
-                            tb_contato
+                                tb_contato
                             WHERE
-                            email_contato LIKE '$email'";
-                    
+                                email_contato LIKE '$email'";
                     $resultado4 = mysqli_query($conexao, $sql4);
                     $dados = mysqli_fetch_array($resultado4);
                     $contato = $dados["codigo_contato"];
@@ -67,7 +65,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         }
                     }else{
                         header("HTTP/1.1 500 Erro de inserção");
-                        echo json_encode(["erro" => "Erro ao encontrar o contato do usuario."]); 
+                        echo json_encode(["erro" => "Erro ao encontrar o contato da instituição."]); 
                     }
                 }else{
                     header("HTTP/1.1 500 Erro de inserção");
@@ -81,8 +79,5 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         header("HTTP/1.1 500 Registro já existente");
         echo json_encode(["erro" => "Esse CNPJ já está sendo utilizado."]);
     }
-} else {
-    header("HTTP/1.1 401 Request Method Incorreto");
-    echo json_encode(["erro" => "O método de solicitação está incorreto."]);
 }
 ?>
