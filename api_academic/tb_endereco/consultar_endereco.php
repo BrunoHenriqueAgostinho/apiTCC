@@ -9,7 +9,7 @@
 }
 */
 header('Content-Type: application/json');
-header("Access-Control-Allow-Origin: *");
+//header("Access-Control-Allow-Origin: *");
 if($_SERVER["REQUEST_METHOD"] == "GET"){
     require("../conexao.php");
     $json = file_get_contents("php://input");
