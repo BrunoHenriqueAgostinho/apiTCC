@@ -36,8 +36,5 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
             echo json_encode(["erro" => "Erro ao deletar contato."]);
         }
     }
-} else {
-    header("HTTP/1.1 401 Request Method Incorreto");
-    echo json_encode(["erro" => "O método de solicitação está incorreto."]);
 }
 ?>

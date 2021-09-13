@@ -40,8 +40,5 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         header("HTTP/1.1 500 Registro já existente");
         echo json_encode(["erro" => "Essa reação já foi reagido."]);
     }
-} else {
-    header("HTTP/1.1 401 Request Method Incorreto");
-    echo json_encode(["erro" => "O método de solicitação está incorreto."]);
 }
 ?>

@@ -48,9 +48,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         header("HTTP/1.1 500 Registro inexistente.");
         echo json_encode(["erro" => "Esse endereço já existe."]);
     }
-} else {
-    header("HTTP/1.1 401 Request Method Incorreto");
-    echo json_encode(["erro" => "O método de solicitação está incorreto."]);
 }
 ?>
 

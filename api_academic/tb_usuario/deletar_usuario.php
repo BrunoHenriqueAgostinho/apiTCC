@@ -43,8 +43,5 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
         $sql6 = "DELETE FROM tb_contato WHERE codigo_contato = $codigo";
         $resultado6 = mysqli_query($conexao, $sql6);
     }
-} else {
-    header("HTTP/1.1 401 Request Method Incorreto");
-    echo json_encode(["erro" => "O método de solicitação está incorreto."]);
 }
 ?>

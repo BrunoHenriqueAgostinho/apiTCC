@@ -42,8 +42,5 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
         header("HTTP/1.1 500 Erro no SQL");
         echo json_encode(["erro" => "Erro ao pesquisar por usuários."]);
     }
-} else {
-    header("HTTP/1.1 401 Request Method Incorreto");
-    echo json_encode(["erro" => "O método de solicitação está incorreto."]);
 }
 ?>

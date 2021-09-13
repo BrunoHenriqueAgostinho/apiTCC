@@ -48,8 +48,5 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
             echo json_encode(["erro" => "Erro ao alterar relação de desenvolvimento."]);
         }
     }
-} else {
-    header("HTTP/1.1 401 Request Method Incorreto");
-    echo json_encode(["erro" => "O método de solicitação está incorreto."]);
 }
 ?>
