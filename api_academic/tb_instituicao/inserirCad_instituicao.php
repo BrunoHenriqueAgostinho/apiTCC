@@ -18,10 +18,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $deco = json_decode($json);
     $cnpj = $deco->cnpj;
     $nome = $deco->nome;
-    $senha = $deco->senha;
+    $senha_des = $deco->senha;
     $email = $deco->email;
     //$timezone = new DateTimeZone('America/Sao_Paulo');
     $dtCadastro = date('Y-m-d');//new date('now', $timezone);
+    $senha = md5($senha_des);
     if(validar_cnpj($cnpj)){
         $sql1 = "SELECT
                     *
@@ -82,7 +83,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
     }else{
         header("HTTP/1.1 500 Registro já existente");
-        echo json_encode(["erro" => "Para CNPJ são somente permitidos números e até 14 caracteres"]);
+        echo json_encode(["erro" => "CNPJ inexistente"]);
     }
 }
 ?>

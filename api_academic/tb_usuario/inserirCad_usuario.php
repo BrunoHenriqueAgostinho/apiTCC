@@ -17,7 +17,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $deco = json_decode($json);
     $cpf = $deco->cpf;
     $nome = $deco->nome;
-    $senha = $deco->senha;
+    $senha_des = $deco->senha;
+    $senha = md5($senha_des);
     $email = $deco->email;
     $dtCadastro = date('Y-m-d');
     if(validaCPF($cpf)){

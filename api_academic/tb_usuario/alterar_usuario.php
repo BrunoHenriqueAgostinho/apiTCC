@@ -19,7 +19,8 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
     $deco = json_decode($json);
     $cpf = $deco->cpf;
     $nome = $deco->nome;
-    $senha = $deco->senha;
+    $senha_des = $deco->senha;
+    $senha = md5($senha_des);
     $descricao = $deco->descricao;
     $foto = $deco->foto;
     $tema = $deco->tema;

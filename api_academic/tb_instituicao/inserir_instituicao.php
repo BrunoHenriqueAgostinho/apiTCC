@@ -18,7 +18,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $cnpj = $deco->cnpj;
     $nome = $deco->nome;
     $logotipo = $deco->logotipo;
-    $senha = $deco->senha;
+    $senha_des = $deco->senha;
+    $senha = md5($senha_des);
     $contato = $deco->contato;
     //$timezone = new DateTimeZone('America/Sao_Paulo');
     $dtCadastro = date('Y-m-d');//new date('now', $timezone);

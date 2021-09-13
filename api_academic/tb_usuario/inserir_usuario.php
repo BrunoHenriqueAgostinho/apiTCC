@@ -16,7 +16,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $deco = json_decode($json);
     $cpf = $deco->cpf;
     $nome = $deco->nome;
-    $senha = $deco->senha;
+    $senha_des = $deco->senha;
+    $senha = md5($senha_des);
     $contato = $deco->contato;
     $dtCadastro = date('Y-m-d');
     

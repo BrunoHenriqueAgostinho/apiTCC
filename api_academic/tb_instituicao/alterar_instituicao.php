@@ -16,7 +16,8 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
     $deco = json_decode($json);
     $cnpj = $deco->cnpj;
     $nome = $deco->nome;
-    $senha = $deco->senha;
+    $senha_des = $deco->senha;
+    $senha = md5($senha_des);
     $logotipo = $deco->logotipo;
 
     $sql1 = "SELECT
