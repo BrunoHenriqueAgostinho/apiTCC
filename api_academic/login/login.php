@@ -6,7 +6,8 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $json = file_get_contents("php://input");
     $deco = json_decode($json);
     $email = $deco->email;
-    $senha = $deco->senha;
+    $senha_des = $deco->senha;
+    $senha = md5($senha_des);
     
     $sql1 = "SELECT codigo_contato FROM tb_contato WHERE email_contato LIKE '$email'";
     $resultado1 = mysqli_query($conexao, $sql1);
