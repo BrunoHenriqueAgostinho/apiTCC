@@ -82,7 +82,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             echo json_encode(["erro" => "Esse CNPJ já está sendo utilizado."]);
         }
     }else{
-        header("HTTP/1.1 500 Registro já existente");
+        header("HTTP/1.1 500 CNPJ inexistente");
         echo json_encode(["erro" => "CNPJ inexistente"]);
     }
 }

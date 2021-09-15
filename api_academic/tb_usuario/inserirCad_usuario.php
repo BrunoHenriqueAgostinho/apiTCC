@@ -84,7 +84,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             echo json_encode(["erro" => "Esse CPF já está sendo utilizado."]);
         }
     }else{
-        header("HTTP/1.1 500 Registro já existente");
+        header("HTTP/1.1 500 CPF inexistente");
         echo json_encode(["erro" => "CPF inexistente"]);
     }
 }
