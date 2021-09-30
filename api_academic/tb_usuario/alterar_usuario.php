@@ -14,7 +14,8 @@
 header("Content-Type: application/json");
 //header("Access-Control-Allow-Origin: *");
 if($_SERVER["REQUEST_METHOD"] == "PUT"){
-    require("../conexao.php");
+    $conexao = new PDO("mysql:host=localhost:3306;dbname=academic2", 'root', '');
+    
     $json = file_get_contents("php://input");
     $deco = json_decode($json);
     $cpf = $deco->cpf;
@@ -24,40 +25,28 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
     $descricao = $deco->descricao;
     $foto = $deco->foto;
     $tema = $deco->tema;
-    $status = $deco->status;
+    $telefoneFixo = $deco->telefoneFixo;
+    $telefoneCelular = $deco->telefoneCelular;
 
-    $sql1 = "SELECT 
-                *
-            FROM 
-                tb_usuario 
-            WHERE 
-                cpf_usuario = '$cpf'";
-    $resultado1 = mysqli_query($conexao, $sql1);
-    $contador = mysqli_num_rows($resultado1);
-    if($contador == 0){
-        header("HTTP/1.1 500 Registro inexistente.");
-        echo json_encode(["erro" => "Esse usuário não existe."]);
+    $sql = $conexao->prepare("UPDATE tb_usuario SET nome_usuario = :nome, senha_usuario = :senha, descricao_usuario = :descricao, foto_usuario = :foto, tema_usuario = :tema, telefoneFixo_usuario = :telefoneFixo, telefoneCelular_usuario = :telefoneCelular WHERE cpf_usuario = :cpf");
+    $sql->bindValue(':nome', $nome, PDO::PARAM_STR);
+    $sql->bindValue(':senha', $senha, PDO::PARAM_STR);
+    $sql->bindValue(':descricao', $descricao, PDO::PARAM_STR);
+    $sql->bindValue(':foto', $foto, PDO::PARAM_STR);
+    $sql->bindValue(':tema', $tema, PDO::PARAM_INT);
+    $sql->bindValue(':telefoneFixo', $telefoneFixo, PDO::PARAM_STR);
+    $sql->bindValue(':telefoneCelular', $telefoneCelular, PDO::PARAM_STR);
+    $sql->bindValue(':cpf', $cpf, PDO::PARAM_INT);
+    $status = $sql->execute();
+
+    if($status){
+        http_response_code(200);
+        $dados = ["mensagem" => "Dados do usuário alterado com sucesso."];
+        echo json_encode($dados);
     } else {
-        $sql2 = "UPDATE tb_usuario 
-                    SET 
-                        nome_usuario = '$nome',
-                        senha_usuario = '$senha',
-                        descricao_usuario = '$descricao',
-                        foto_usuario = '$foto',
-                        tema_usuario = $tema,
-                        status_usuario = $status
-                    WHERE
-                        cpf_usuario = '$cpf'";
-        $resultado2 = mysqli_query($conexao, $sql2);
-        if($resultado2){
-            http_response_code(200);
-            $dados = ["mensagem" => "Usuário alterado com sucesso"];
-            echo json_encode($dados);
-        } else {
-            http_response_code(202);
-            $dados = ["status" => "Erro", "msg"=> "Erro ao Alterar"];
-            echo json_encode($dados);
-        }
+        http_response_code(202);
+        $dados = ["erro"=> "Erro ao alterar dados do usuário."];
+        echo json_encode($dados);
     }
 }
 ?>

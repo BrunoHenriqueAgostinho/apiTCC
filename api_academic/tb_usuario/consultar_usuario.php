@@ -13,27 +13,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $deco = json_decode($json);
     $cpf = $deco->cpf;
 
-    $sql = "SELECT 
-                U.cpf_usuario,
-                U.nome_usuario, 
-                U.senha_usuario,
-                U.descricao_usuario,
-                U.foto_usuario,
-                U.dtCadastro_usuario,
-                U.tema_usuario,
-                U.status_usuario,
-                C.codigo_contato,
-                C.email_contato,
-                C.telefoneFixo_contato,
-                C.telefoneCelular_contato
-            FROM 
-                tb_usuario U, 
-                tb_contato C 
-            WHERE 
-                U.Tb_Contato_codigo_contato = C.codigo_contato 
-            AND  
-                cpf_usuario = " . $cpf;
-        
+    $sql = "SELECT * FROM tb_usuario WHERE cpf_usuario = $cpf";
     $resultado = mysqli_query($conexao, $sql);
     $contador = mysqli_num_rows($resultado);
     if ($contador == 0) {

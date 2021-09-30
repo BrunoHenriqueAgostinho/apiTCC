@@ -8,26 +8,23 @@
 header("Content-Type: application/json");
 //header("Access-Control-Allow-Origin: *");
 if($_SERVER["REQUEST_METHOD"] == "GET"){
-    require("../conexao.php");
+    $conexao = new PDO("mysql:host=localhost:3306;dbname=academic2", 'root', '');
     $json = file_get_contents("php://input");
     $deco = json_decode($json);
     $pesquisa = $deco->pesquisa;
+    $pesquisa = '%' . $pesquisa . '%';
     
-    $sql = "SELECT 
-                I.*
-            FROM 
-                tb_instituicao I
-            WHERE 
-                I.nome_instituicao like '%$pesquisa%'";
-    $resultado = mysqli_query($conexao, $sql);
-    $contador = mysqli_num_rows($resultado);
-    if ($resultado) {
-        $dados = $resultado->fetch_all(MYSQLI_ASSOC);
+    $sql = $conexao->prepare("SELECT * FROM tb_instituicao WHERE nome_instituicao like :pesquisa AND contaStatus_instituicao = 1");
+    $sql->bindValue(':pesquisa', $pesquisa, PDO::PARAM_STR);
+    $status = $sql->execute();
+    $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+    $contador = count($resultado);
+    if ($contador > 0){
         http_response_code(200);
-        echo json_encode($dados, JSON_UNESCAPED_UNICODE);
+        echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
     } else {
-        header("HTTP/1.1 500 Erro no SQL");
-        echo json_encode(["erro" => "Erro ao pesquisar por instituições."]);
+        header("HTTP/1.1 500 Sem retorno");
+        echo json_encode(["erro" => "Nada foi encontrado."]);
     }
 }
 ?>

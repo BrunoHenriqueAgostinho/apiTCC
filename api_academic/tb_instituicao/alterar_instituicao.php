@@ -11,44 +11,37 @@
 header("Content-Type: application/json");
 //header("Access-Control-Allow-Origin: *");
 if($_SERVER["REQUEST_METHOD"] == "PUT"){
-    require("../conexao.php");
+    $conexao = new PDO("mysql:host=localhost:3306;dbname=academic2", 'root', '');
+    
     $json = file_get_contents("php://input");
     $deco = json_decode($json);
     $cnpj = $deco->cnpj;
     $nome = $deco->nome;
+    $logotipo = $deco->logotipo;
     $senha_des = $deco->senha;
     $senha = md5($senha_des);
-    $logotipo = $deco->logotipo;
+    $telefoneFixo = $deco->telefoneFixo;
+    $telefoneCelular = $deco->telefoneCelular;
+    $cidade = $deco->cidade;
 
-    $sql1 = "SELECT
-                *
-            FROM
-                tb_instituicao
-            WHERE
-                cnpj_instituicao = '$cnpj'";
-    $resultado1 = mysqli_query($conexao, $sql1);
-    $contador1 = mysqli_num_rows($resultado1);
-    if ($contador1 == 0) {
-        header("HTTP/1.1 500 Registro inexistente.");
-        echo json_encode(["erro" => "Essa instituição não existe."]);
+    $sql = $conexao->prepare("UPDATE tb_instituicao SET nome_instituicao = :nome, senha_instituicao = :senha, logotipo_instituicao = :logotipo, telefoneFixo_instituicao = :telefoneFixo, telefoneCelular_instituicao = :telefoneCelular, cidade_instituicao = :cidade WHERE cnpj_instituicao = :cnpj");
+    $sql->bindValue(':nome', $nome, PDO::PARAM_STR);
+    $sql->bindValue(':senha', $senha, PDO::PARAM_STR);
+    $sql->bindValue(':logotipo', $logotipo, PDO::PARAM_STR);
+    $sql->bindValue(':telefoneFixo', $telefoneFixo, PDO::PARAM_STR);
+    $sql->bindValue(':telefoneCelular', $telefoneCelular, PDO::PARAM_STR);
+    $sql->bindValue(':cidade', $cidade, PDO::PARAM_STR);
+    $sql->bindValue(':cnpj', $cnpj, PDO::PARAM_INT);
+    $status = $sql->execute();
+
+    if($status){
+        http_response_code(200);
+        $dados = ["mensagem" => "Dados do usuário alterado com sucesso."];
+        echo json_encode($dados);
     } else {
-        $sql2 = "UPDATE tb_instituicao 
-                SET 
-                    nome_instituicao = '$nome',
-                    logotipo_instituicao = '$logotipo',
-                    senha_instituicao = '$senha'
-                WHERE
-                    cnpj_instituicao = '$cnpj'";
-        $resultado2 = mysqli_query($conexao, $sql2);
-        if($resultado2){
-            http_response_code(200);
-            $data = ["mensagem" => "Instituição alterada com sucesso."];
-            echo json_encode($data);
-        } else {
-            http_response_code(202);
-            $data = ["status" => "Erro", "msg"=> "Erro ao Alterar"];
-            echo json_encode($data);
-        }
+        http_response_code(202);
+        $dados = ["erro"=> "Erro ao alterar dados do usuário."];
+        echo json_encode($dados);
     }
 }
 ?>

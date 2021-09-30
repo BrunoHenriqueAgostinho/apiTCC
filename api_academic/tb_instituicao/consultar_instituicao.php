@@ -12,20 +12,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $deco = json_decode($json);
     $cnpj = $deco->cnpj;
 
-    $sql = "SELECT 
-                I.*, 
-                C.*,
-                E.*
-            FROM 
-                tb_instituicao I, 
-                tb_contato C,
-                tb_endereco E
-            WHERE 
-                I.Tb_Contato_codigo_contato = C.codigo_contato 
-            AND
-                E.Tb_Instituicao_cnpj_instituicao = I.cnpj_instituicao
-            AND  
-                I.cnpj_instituicao = " . $cnpj;
+    $sql = "SELECT * FROM tb_instituicao WHERE cnpj_instituicao = $cnpj";
     $resultado = mysqli_query($conexao, $sql);
     $contador = mysqli_num_rows($resultado);
     if ($contador == 0) {
