@@ -26,19 +26,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $dtCadastro = date('Y-m-d');
     
     if(validar_cnpj($cnpj)){
-        try {
-            $sql = $conexao->prepare("INSERT INTO tb_instituicao(cnpj_instituicao, nome_instituicao, senha_instituicao, dtCadastro_instituicao, email_instituicao) VALUES
-                (:cnpj, :nome, :senha, '$dtCadastro', :email)");
-            $sql->bindValue(':cnpj', $cnpj, PDO::PARAM_INT);
-            $sql->bindValue(':nome', $nome, PDO::PARAM_STR);
-            $sql->bindValue(':senha', $senha, PDO::PARAM_STR);
-            $sql->bindValue(':email', $email, PDO::PARAM_STR);
-            $status = $sql->execute();
-            http_response_code(201);
-            echo json_encode(["mensagem" => "Instituição cadastrada com sucesso."]);
-            
-        } catch (PDOException $e){
+        $sql1 = $conexao->prepare("SELECT * FROM tb_usuario WHERE email_usuario = :email");
+        $sql1->bindValue(':email', $email, PDO::PARAM_STR);
+        $sql1->execute();
+        $resultado1 = $sql1->fetch(PDO::FETCH_ASSOC);
+        $sql2 = $conexao->prepare("SELECT * FROM tb_instituicao WHERE email_instituicao = :email");
+        $sql2->bindValue(':email', $email, PDO::PARAM_STR);
+        $sql2->execute();
+        $resultado2 = $sql2->fetch(PDO::FETCH_ASSOC);
+        if(empty($resultado1) && empty($resultado2)){
+            try {
+                $sql = $conexao->prepare("INSERT INTO tb_instituicao(cnpj_instituicao, nome_instituicao, senha_instituicao, dtCadastro_instituicao, email_instituicao) VALUES
+                    (:cnpj, :nome, :senha, '$dtCadastro', :email)");
+                $sql->bindValue(':cnpj', $cnpj, PDO::PARAM_INT);
+                $sql->bindValue(':nome', $nome, PDO::PARAM_STR);
+                $sql->bindValue(':senha', $senha, PDO::PARAM_STR);
+                $sql->bindValue(':email', $email, PDO::PARAM_STR);
+                $status = $sql->execute();
+                http_response_code(201);
+                echo json_encode(["mensagem" => "Instituição cadastrada com sucesso."]);
+            } catch (PDOException $e){
                 echo json_encode(["erro" => "Não foi possível realizar o cadastro da instituição."]);
+            }
+        } else {
+            echo json_encode(["erro" => "Não foi possível realizar o cadastro da instituição."]);
         }
     } else{
         header("HTTP/1.1 500 CNPJ inválido");

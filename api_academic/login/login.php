@@ -1,4 +1,40 @@
 <?php
+
+header("Content-Type: application/json");
+header("Access-Controlo-Allow-Origin: *");
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $conexao = new PDO("mysql:host=localhost:3306;dbname=academic2", 'root', '');
+    $json = file_get_contents("php://input");
+    $deco = json_decode($json);
+    $email = $deco->email;
+    $senha_des = $deco->senha;
+    $senha = md5($senha_des);
+
+    $sql1 = $conexao->prepare("SELECT cpf_usuario, email_usuario, senha_usuario FROM tb_usuario WHERE email_usuario = :email AND senha_usuario = :senha");
+    $sql1->bindValue(':email', $email, PDO::PARAM_STR);
+    $sql1->bindValue(':senha', $senha, PDO::PARAM_STR);
+    $sql1->execute();
+    $resultado1 = $sql1->fetch(PDO::FETCH_ASSOC);
+    //print_r($resultado1);
+    if (empty($resultado1)){
+        $sql2 = $conexao->prepare("SELECT cnpj_instituicao, email_instituicao, senha_instituicao FROM tb_instituicao WHERE email_instituicao = :email AND senha_instituicao = :senha");
+        $sql2->bindValue(':email', $email, PDO::PARAM_STR);
+        $sql2->bindValue(':senha', $senha, PDO::PARAM_STR);
+        $sql2->execute();
+        $resultado2 = $sql2->fetch(PDO::FETCH_ASSOC);
+        if(empty($resultado2)){
+            header("HTTP/1.1 500 Erro no Login");
+            echo json_encode(["erro" => "Email ou senha inválidos."]);
+        } else {
+            http_response_code(200);
+            echo json_encode(["codigo"=> $resultado2["cnpj_instituicao"]]);
+        }
+    } else {
+        http_response_code(200);
+        echo json_encode(["codigo"=> $resultado1["cpf_usuario"]]);
+    }
+}
+/*
 header("Content-Type: application/json");
 header("Access-Controlo-Allow-Origin: *");
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -49,4 +85,5 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
 }
+*/
 ?>
