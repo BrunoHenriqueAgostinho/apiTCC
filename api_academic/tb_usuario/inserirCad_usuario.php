@@ -46,9 +46,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 echo json_encode(["mensagem" => "Usuário cadastrado com sucesso."]);
                 
             } catch (PDOException $e){
+                header("HTTP/1.1 500 Erro no SQL");
                 echo json_encode(["erro" => "Não foi possível realizar o cadastro do usuário."]);
             }
         } else {
+            header("HTTP/1.1 500 Erro no SQL");
             echo json_encode(["erro" => "Não foi possível realizar o cadastro do usuário."]);
         }
     }else{
