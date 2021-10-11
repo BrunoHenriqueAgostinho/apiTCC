@@ -12,18 +12,18 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $pesquisa = $deco->pesquisa;
 
     $sql1 = "SELECT 
-                codigo_trabalho,
-                nome_trabalho,
-                descricao_trabalho,
-                arquivo_trabalho,
-                formatacao_trabalho,
-                finalizado_trabalho,
-                dtCriacao_trabalho,
-                dtAlteracao_trabalho,
-                dtPublicacao_trabalho,
-                avaliacao_trabalho,
-                Tb_Modelo_codigo_modelo,
-                Tb_instituicao_cnpj_instituicao
+                codigo_trabalho as codigo,
+                nome_trabalho as nome,
+                descricao_trabalho as descricao,
+                arquivo_trabalho as arquivo,
+                formatacao_trabalho as formatacao,
+                finalizado_trabalho as finalizado,
+                dtCriacao_trabalho as dtCriacao,
+                dtAlteracao_trabalho as dtAlteracao,
+                dtPublicacao_trabalho as dtPublicacao,
+                avaliacao_trabalho as avaliacao,
+                Tb_Modelo_codigo_modelo as modelo,
+                Tb_instituicao_cnpj_instituicao as cnpj
             FROM 
                 tb_trabalho
             WHERE 

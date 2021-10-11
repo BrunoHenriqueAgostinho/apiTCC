@@ -11,14 +11,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     require("../conexao.php");
     $json = file_get_contents("php://input");
     $deco = json_decode($json);
-    $cpf = $deco->cpf;
+    $codigo = $deco->codigo;
 
-    $sql = "SELECT cpf_usuario as cpf, nome_usuario as nome, senha_usuario as senha, descricao_usuario as descricao, foto_usuario as foto, dtCadastro_usuario as dtCadastro, tema_usuario as tema, status_usuario as status, contaStatus_usuario as contaStatus, email_usuario as email, telefoneFixo_usuario as telefoneFixo, telefoneCelular_usuario as telefoneCelular FROM tb_usuario WHERE cpf_usuario = $cpf";
+    $sql = "SELECT codigo_modelo as codigo, nome_modelo as nome, arquivo_modelo as arquivo, formatacao_modelo as formatacao, dtCriacao_modelo as dtCriacao, descricao_modelo as descricao, Tb_instituicao_cnpj_instituicao as cnpj FROM tb_modelo WHERE codigo_modelo = $codigo";
     $resultado = mysqli_query($conexao, $sql);
     $contador = mysqli_num_rows($resultado);
     if ($contador == 0) {
         header("HTTP/1.1 500 Erro no SQL");
-        echo json_encode(["erro" => "Erro ao consultar usuário."]);
+        echo json_encode(["erro" => "Erro ao consultar modelo."]);
     } else {
         $dados = $resultado->fetch_array(MYSQLI_ASSOC);
         echo json_encode($dados, JSON_UNESCAPED_UNICODE);
