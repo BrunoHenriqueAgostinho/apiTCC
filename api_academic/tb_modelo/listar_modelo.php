@@ -5,7 +5,7 @@
 
 header("Content-Type: application/json");
 //header("Access-Control-Allow-Origin: *");
-if($_SERVER["REQUEST_METHOD"] == "GET"){
+if($_SERVER["REQUEST_METHOD"] == "POST"){
     require("../conexao.php");
     $json = file_get_contents("php://input");
     $deco = json_decode($json);
@@ -26,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
         $valores = mysqli_fetch_array($resultado1);
         $codigo = $valores["cnpj_instituicao"];
         $sql2 = "SELECT 
-                    * 
+                    codigo_modelo as codigo, nome_modelo as nome, arquivo_modelo as arquivo, formatacao_modelo as formatacao, dtCriacao_modelo as dtCriacao, descricao_modelo as descricao, Tb_instituicao_cnpj_instituicao as cnpj 
                 FROM 
                     tb_modelo 
                 WHERE

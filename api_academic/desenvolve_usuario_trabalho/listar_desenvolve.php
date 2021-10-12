@@ -7,13 +7,42 @@
 
 header("Content-Type: application/json");
 //header("Access-Control-Allow-Origin: *");
-if($_SERVER["REQUEST_METHOD"] == "GET"){
+if($_SERVER["REQUEST_METHOD"] == "POST"){
     require("../conexao.php");
     $json = file_get_contents("php://input");
     $deco = json_decode($json);
-    $codigo = $deco->codigo;
+    $codigo = $deco->cpf;
 
-    $sql1 = "SELECT 
+    $sql = "SELECT 
+                T.codigo_trabalho as codigo,
+                T.nome_trabalho as nome,
+                T.descricao_trabalho as descricao,
+                T.arquivo_trabalho as arquivo,
+                T.formatacao_trabalho as formatacao,
+                T.finalizado_trabalho as finalizado,
+                T.dtCriacao_trabalho as dtCriacao,
+                T.dtAlteracao_trabalho as dtAlteracao,
+                T.dtPublicacao_trabalho as dtPublicacao,
+                T.avaliacao_trabalho as avaliacao,
+                T.Tb_Modelo_codigo_modelo as modelo,
+                T.Tb_instituicao_cnpj_instituicao as cnpj 
+            FROM
+                tb_trabalho T, desenvolve_usuario_trabalho D
+            WHERE
+                D.Tb_Usuario_cpf_usuario = $codigo AND T.codigo_trabalho = D.Tb_Trabalho_codigo_trabalho";
+    $resultado = mysqli_query($conexao, $sql);
+    $contador = mysqli_num_rows($resultado);
+    if ($contador == 0){
+        header("HTTP/1.1 500 Erro ao consultar banco");
+        echo json_encode(["erro" => "Não foi possível consultar seus trabalhos."]);
+    } else {
+        $dados = $resultado->fetch_all(MYSQLI_ASSOC);
+        http_response_code(200);
+        echo json_encode($dados, JSON_UNESCAPED_UNICODE);
+    }
+}
+/*
+$sql1 = "SELECT 
                 * 
             FROM 
                 tb_trabalho
@@ -42,5 +71,5 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
             echo json_encode($dados, JSON_UNESCAPED_UNICODE);
         }
     }
-}
+*/
 ?>
