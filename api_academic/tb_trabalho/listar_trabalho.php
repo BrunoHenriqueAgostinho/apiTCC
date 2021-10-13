@@ -9,7 +9,6 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     require("../conexao.php");
     $json = file_get_contents("php://input");
     $deco = json_decode($json);
-    $pesquisa = $deco->pesquisa;
 
     $sql1 = "SELECT 
                 codigo_trabalho as codigo,
@@ -27,14 +26,14 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
             FROM 
                 tb_trabalho
             WHERE 
-                nome_trabalho like '%".$pesquisa."%'";
+                finalizado_trabalho = 1";
 
     $resultado1 = mysqli_query($conexao, $sql1); 
     if ($resultado1) { 
         $dados = $resultado1->fetch_all(MYSQLI_ASSOC);
         http_response_code(200);
-        if ((json_encode($dados, JSON_UNESCAPED_UNICODE) == '[]') || ($pesquisa == '')) {
-            $data = ["mensagem" => "Não há trabalhos com esse nome"];
+        if ((json_encode($dados, JSON_UNESCAPED_UNICODE) == '[]')) {
+            $data = ["mensagem" => "Não há trabalhos postados na plataforma"];
             echo json_encode($data);
         } else {
             echo json_encode($dados, JSON_UNESCAPED_UNICODE);
