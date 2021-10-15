@@ -38,18 +38,13 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
         header("HTTP/1.1 500 Registro inexistente.");
         echo json_encode(["erro" => "Esse trabalho não existe."]);
     } else {
-        $sql2 = "UPDATE tb_trabalho 
-                SET 
-                    nome_trabalho = '$nome',
-                    descricao_trabalho = '$descricao',
-                    arquivo_trabalho = '$arquivo',
-                    formatacao_trabalho = '$formatacao',
-                    finalizado_trabalho = $finalizado,
-                    dtAlteracao_trabalho = '$dtAlteracao',
-                    avaliacao_trabalho = $avaliacao,
-                    Tb_Instituicao_cnpj_instituicao = '$cnpj'
-                WHERE
-                    codigo_trabalho = '$codigo'";
+        if(empty($cnpj) && empty($avaliacao)){
+            $sql2 = "UPDATE tb_trabalho SET nome_trabalho = '$nome', descricao_trabalho = '$descricao', arquivo_trabalho = '$arquivo', formatacao_trabalho = '$formatacao', finalizado_trabalho = $finalizado, dtAlteracao_trabalho = '$dtAlteracao' WHERE codigo_trabalho = $codigo";
+        } else if (empty($avaliacao)){
+            $sql2 = "UPDATE tb_trabalho SET nome_trabalho = '$nome', descricao_trabalho = '$descricao', arquivo_trabalho = '$arquivo', formatacao_trabalho = '$formatacao', finalizado_trabalho = $finalizado, dtAlteracao_trabalho = '$dtAlteracao', Tb_Instituicao_cnpj_instituicao = '$cnpj' WHERE codigo_trabalho = $codigo";
+        } else {
+            $sql2 = "UPDATE tb_trabalho SET nome_trabalho = '$nome', descricao_trabalho = '$descricao', arquivo_trabalho = '$arquivo', formatacao_trabalho = '$formatacao', finalizado_trabalho = $finalizado, dtAlteracao_trabalho = '$dtAlteracao', Tb_Instituicao_cnpj_instituicao = '$cnpj', avaliacao_trabalho = '$avaliacao' WHERE codigo_trabalho = $codigo";
+        }
 
         $resultado2 = mysqli_query($conexao, $sql2);
         if ($resultado2) {
@@ -57,8 +52,8 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
             $data = ["mensagem" => "Trabalho alterado com sucesso"];
             echo json_encode($data);
         } else {
-            http_response_code(202);
-            $data = ["status" => "Erro", "msg"=> "Erro ao Alterar"];
+            header("HTTP/1.1 500 Erro no SQL");
+            $data = ["erro"=> mysqli_error($conexao)];
             echo json_encode($data);
         }
     }

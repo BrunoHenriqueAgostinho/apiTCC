@@ -29,7 +29,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             FROM
                 tb_trabalho T, desenvolve_usuario_trabalho D
             WHERE
-                D.Tb_Usuario_cpf_usuario = $codigo AND T.codigo_trabalho = D.Tb_Trabalho_codigo_trabalho";
+                D.Tb_Usuario_cpf_usuario = $codigo AND T.codigo_trabalho = D.Tb_Trabalho_codigo_trabalho
+            ORDER BY T.dtCriacao_trabalho DESC";
     $resultado = mysqli_query($conexao, $sql);
     $contador = mysqli_num_rows($resultado);
     if ($contador == 0){
