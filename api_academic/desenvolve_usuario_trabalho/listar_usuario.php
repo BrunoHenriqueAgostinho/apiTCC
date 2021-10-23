@@ -20,7 +20,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 U.contaStatus_usuario as contaStatus,
                 U.email_usuario as email,
                 U.telefoneFixo_usuario as telefoneFixo,
-                U.telefoneCelular_usuario as telefoneCelular 
+                U.telefoneCelular_usuario as telefoneCelular,
+                D.Tb_Trabalho_codigo_trabalho as codigo,
+                D.cargo_usuario as cargo
             FROM
                 tb_usuario U, desenvolve_usuario_trabalho D
             WHERE

@@ -8,7 +8,7 @@
 
 header("Content-Type: application/json");
 //header("Access-Control-Allow-Origin: *");
-if($_SERVER["REQUEST_METHOD"] == "GET"){
+if($_SERVER["REQUEST_METHOD"] == "POST"){
     require("../conexao.php");
     $json = file_get_contents("php://input");
     $deco = json_decode($json);
@@ -27,7 +27,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $contador1 = mysqli_num_rows($resultado1);
 
     if ($contador1 == 0){
-        header("HTTP/1.1 201 Relação de desenvolvimento inexistente");
+        header("HTTP/1.1 500 Relação de desenvolvimento inexistente");
         echo json_encode(["erro" => "Não existe essa relação de desenvolvimento."]);
     } else {
         $sql2 = "DELETE FROM desenvolve_usuario_trabalho WHERE Tb_Usuario_cpf_usuario = '$cpf' AND Tb_Trabalho_codigo_trabalho = $codigo";

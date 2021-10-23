@@ -11,7 +11,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $deco = json_decode($json);
     $pesquisa = $deco->pesquisa;
 
-    if($pesquisa != ''){
+    if($pesquisa != '' && $pesquisa != null){
         $sql1 = "SELECT 
             codigo_trabalho as codigo,
             nome_trabalho as nome,

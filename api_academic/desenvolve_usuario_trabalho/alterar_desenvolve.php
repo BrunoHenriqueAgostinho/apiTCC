@@ -29,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
     $contador1 = mysqli_num_rows($resultado1);
 
     if ($contador1 == 0){
-        header("HTTP/1.1 201 Relação de desenvolvimento inexistente");
+        header("HTTP/1.1 500 Relação de desenvolvimento inexistente");
         echo json_encode(["erro" => "Não existe essa relação de desenvolvimento."]);
     } else {
         $sql2 = "UPDATE desenvolve_usuario_trabalho 
@@ -41,7 +41,7 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
                         Tb_Trabalho_codigo_trabalho = $codigo";
         $resultado2 = mysqli_query($conexao, $sql2);
         if ($resultado2) {
-            http_response_code(201);
+            http_response_code(200);
             echo json_encode(["mensagem" => "Relação de desenvolvimento alterado com sucesso."]);
         } else {
             header("HTTP/1.1 500 Erro no SQL");
