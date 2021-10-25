@@ -15,7 +15,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $deco = json_decode($json);
     $cpf = $deco->cpf;
     $codigo = $deco->codigo;
-    $cargo = $deco->cargo;
+    $cargo = 1;
 
     $sql1 = "SELECT 
                 * 
@@ -58,14 +58,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             ('$cpf', $codigo, $cargo)";
                 $resultado4 = mysqli_query($conexao, $sql4);
                 if ($resultado4) {
-                    http_response_code(201);
+                    http_response_code(200);
                     echo json_encode(["mensagem" => "Relação de desenvolvimento inserida com sucesso."]);
                 } else {
                     header("HTTP/1.1 500 Erro no SQL");
                     echo json_encode(["erro" => "Erro ao inserir relação de desenvolvimento."]);
                 }
             } else {
-                header("HTTP/1.1 201 Relação de desenvolvimento existente");
+                header("HTTP/1.1 500 Relação de desenvolvimento existente");
                 echo json_encode(["erro" => "Relação de desenvolvimento já existe."]);
             }
         }
