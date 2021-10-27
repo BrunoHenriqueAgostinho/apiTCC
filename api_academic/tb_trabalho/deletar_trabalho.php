@@ -2,7 +2,7 @@
 
 header("Content-Type: application/json");
 //header("Access-Control-Allow-Origin: *");
-if($_SERVER["REQUEST_METHOD"] == "GET"){
+if($_SERVER["REQUEST_METHOD"] == "POST"){
     require("../conexao.php");
     $json = file_get_contents("php://input");
     $deco = json_decode($json);
@@ -25,7 +25,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
         $sql2  = "DELETE FROM
                             desenvolve_usuario_trabalho
                         WHERE
-                            Tb_Trabalho_codigo_trabalho = " . $codigo;
+                            Tb_Trabalho_codigo_trabalho = $codigo";
 
         $resultado2 = mysqli_query($conexao, $sql2);
         if ($resultado2) {
@@ -33,7 +33,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
             $sql3  = "DELETE FROM
                             reage_usuario_trabalho
                         WHERE
-                            Tb_Trabalho_codigo_trabalho = " . $codigo;
+                            Tb_Trabalho_codigo_trabalho = $codigo";
 
             $resultado3 = mysqli_query($conexao, $sql3);
             if ($resultado3) {

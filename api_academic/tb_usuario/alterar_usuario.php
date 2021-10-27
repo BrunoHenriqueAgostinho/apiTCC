@@ -25,15 +25,16 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
     $descricao = $deco->descricao;
     $foto = $deco->foto;
     $tema = $deco->tema;
+    $status = $deco->status;
     $telefoneFixo = $deco->telefoneFixo;
     $telefoneCelular = $deco->telefoneCelular;
 
-    $sql = $conexao->prepare("UPDATE tb_usuario SET nome_usuario = :nome, senha_usuario = :senha, descricao_usuario = :descricao, foto_usuario = :foto, tema_usuario = :tema, telefoneFixo_usuario = :telefoneFixo, telefoneCelular_usuario = :telefoneCelular WHERE cpf_usuario = :cpf");
+    $sql = $conexao->prepare("UPDATE tb_usuario SET nome_usuario = :nome, descricao_usuario = :descricao, foto_usuario = :foto, tema_usuario = :tema, status_usuario = :status, telefoneFixo_usuario = :telefoneFixo, telefoneCelular_usuario = :telefoneCelular WHERE cpf_usuario = :cpf");
     $sql->bindValue(':nome', $nome, PDO::PARAM_STR);
-    $sql->bindValue(':senha', $senha, PDO::PARAM_STR);
     $sql->bindValue(':descricao', $descricao, PDO::PARAM_STR);
     $sql->bindValue(':foto', $foto, PDO::PARAM_STR);
     $sql->bindValue(':tema', $tema, PDO::PARAM_INT);
+    $sql->bindValue(':status', $status, PDO::PARAM_INT);
     $sql->bindValue(':telefoneFixo', $telefoneFixo, PDO::PARAM_STR);
     $sql->bindValue(':telefoneCelular', $telefoneCelular, PDO::PARAM_STR);
     $sql->bindValue(':cpf', $cpf, PDO::PARAM_INT);
@@ -44,7 +45,7 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
         $dados = ["mensagem" => "Dados do usuário alterado com sucesso."];
         echo json_encode($dados);
     } else {
-        http_response_code(202);
+        header("HTTP/1.1 500 Erro no SQL");
         $dados = ["erro"=> "Erro ao alterar dados do usuário."];
         echo json_encode($dados);
     }
