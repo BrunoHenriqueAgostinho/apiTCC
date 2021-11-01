@@ -20,7 +20,10 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
     $codigo = $deco->codigo;
     $nome = $deco->nome;
     $arquivo = $deco->arquivo;
-    $formatacao = $deco->formatacao;
+    $margemDireita = $deco->margemDireita;
+    $margemEsquerda = $deco->margemEsquerda;
+    $margemTopo = $deco->margemTopo;
+    $margemBaixo = $deco->margemBaixo;
     $descricao = $deco->descricao;
 
     $sql1 = "SELECT
@@ -40,7 +43,10 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
                         Tb_Instituicao_cnpj_instituicao =  '$cnpj',
                         nome_modelo = '$nome', 
                         arquivo_modelo = '$arquivo', 
-                        formatacao_modelo = '$formatacao', 
+                        margemDireita_modelo = '$margemDireita', 
+                        margemEsquerda_modelo = '$margemEsquerda', 
+                        margemTopo_modelo = '$margemTopo', 
+                        margemBaixo_modelo = '$margemBaixo', 
                         descricao_modelo = '$descricao'
                     WHERE 
                         codigo_modelo = ".$codigo;

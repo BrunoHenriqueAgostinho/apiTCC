@@ -3,7 +3,7 @@
 header("Content-Type: application/json");
 header("Access-Controlo-Allow-Origin: *");
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $conexao = new PDO("mysql:host=localhost:3306;dbname=academic2", 'root', '');
+    $conexao = new PDO("mysql:host=localhost:3306;dbname=academic", 'root', '');
     $json = file_get_contents("php://input");
     $deco = json_decode($json);
     $email = $deco->email;

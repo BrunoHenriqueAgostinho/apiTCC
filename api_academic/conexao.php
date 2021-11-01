@@ -2,7 +2,7 @@
     $host = "localhost";
     $user = "root";
     $password = "";
-    $base = "academic2";
+    $base = "academic";
     
     $conexao = @mysqli_connect($host, $user, $password);
     $conexao->set_charset("UTF8");

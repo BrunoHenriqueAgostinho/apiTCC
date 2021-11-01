@@ -13,7 +13,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $deco = json_decode($json);
     $codigo = $deco->codigo;
 
-    $sql = "SELECT codigo_modelo as codigo, nome_modelo as nome, arquivo_modelo as arquivo, formatacao_modelo as formatacao, dtCriacao_modelo as dtCriacao, descricao_modelo as descricao, Tb_instituicao_cnpj_instituicao as cnpj FROM tb_modelo WHERE codigo_modelo = $codigo";
+    $sql = "SELECT codigo_modelo as codigo, nome_modelo as nome, arquivo_modelo as arquivo, margemDireita_modelo as margemDireita, margemEsquerda_modelo as margemEsquerda, margemTopo_modelo as margemTopo, margemBaixo_modelo as margemBaixo, dtCriacao_modelo as dtCriacao, descricao_modelo as descricao, Tb_instituicao_cnpj_instituicao as cnpj FROM tb_modelo WHERE codigo_modelo = $codigo";
     $resultado = mysqli_query($conexao, $sql);
     $contador = mysqli_num_rows($resultado);
     if ($contador == 0) {

@@ -18,12 +18,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $cnpj = $deco->cnpj;
     $nome = $deco->nome;
     $arquivo = $deco->arquivo;
-    $formatacao = $deco->formatacao;
+    $margemDireita = $deco->margemDireita;
+    $margemEsquerda = $deco->margemEsquerda;
+    $margemTopo = $deco->margemTopo;
+    $margemBaixo = $deco->margemBaixo;
     $dtCriacao = date('Y-m-d');
     $descricao = $deco->descricao;
 
-    $sql = "INSERT INTO tb_modelo (Tb_Instituicao_cnpj_instituicao, nome_modelo, arquivo_modelo, formatacao_modelo, dtCriacao_modelo, descricao_modelo) VALUES
-                ('$cnpj','$nome','$arquivo','$formatacao','$dtCriacao','$descricao')";
+    $sql = "INSERT INTO tb_modelo (Tb_Instituicao_cnpj_instituicao, nome_modelo, arquivo_modelo, margemDireita_modelo, margemEsquerda_modelo, margemTopo_modelo, margemBaixo_modelo, dtCriacao_modelo, descricao_modelo) VALUES
+                ('$cnpj', '$nome', '$arquivo', '$margemDireita', '$margemEsquerda', '$margemTopo', '$margemBaixo', '$dtCriacao', '$descricao')";
     $resultado = mysqli_query($conexao, $sql);
     if ($resultado) {
         http_response_code(201);

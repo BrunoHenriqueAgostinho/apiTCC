@@ -20,16 +20,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $nome = $deco->nome;
     $descricao = $deco->descricao;
     $arquivo = $deco->arquivo;
-    $formatacao = $deco->formatacao;
+    $margemDireita = $deco->margemDireita;
+    $margemEsquerda = $deco->margemEsquerda;
+    $margemTopo = $deco->margemTopo;
+    $margemBaixo = $deco->margemBaixo;
     $dtCriacao = date('Y-m-d');
     $dtAlteracao = date('Y-m-d');
     $modelo = $deco->modelo;
 
-    $sql1 = "INSERT INTO tb_trabalho (nome_trabalho, descricao_trabalho, arquivo_trabalho, formatacao_trabalho, dtCriacao_trabalho, dtAlteracao_trabalho,  Tb_Modelo_codigo_modelo) VALUES
-                ('$nome', '$descricao', '$arquivo', '$formatacao', '$dtCriacao', '$dtAlteracao', $modelo)";
+    $sql1 = "INSERT INTO tb_trabalho (nome_trabalho, descricao_trabalho, arquivo_trabalho, margemDireita_trabalho, margemEsquerda_trabalho, margemTopo_trabalho, margemBaixo_trabalho, dtCriacao_trabalho, dtAlteracao_trabalho,  Tb_Modelo_codigo_modelo) VALUES
+                ('$nome', '$descricao', '$arquivo', '$margemDireita', '$margemEsquerda', '$margemTopo', '$margemBaixo', '$dtCriacao', '$dtAlteracao', $modelo)";
     $resultado1 = mysqli_query($conexao, $sql1);
     if ($resultado1) {
-        $sql2 = "SELECT codigo_trabalho as codigo FROM tb_trabalho WHERE nome_trabalho = '$nome' AND descricao_trabalho = '$descricao' AND arquivo_trabalho = '$arquivo' AND formatacao_trabalho = '$formatacao' AND dtCriacao_trabalho = '$dtCriacao' AND Tb_Modelo_codigo_modelo = $modelo";
+        $sql2 = "SELECT codigo_trabalho as codigo FROM tb_trabalho WHERE nome_trabalho = '$nome' AND descricao_trabalho = '$descricao' AND arquivo_trabalho = '$arquivo' AND margemDireita_trabalho = '$margemDireita' AND margemEsquerda_trabalho = '$margemEsquerda' AND margemTopo_trabalho = '$margemTopo' AND margembaixo_trabalho = '$margemBaixo' AND dtCriacao_trabalho = '$dtCriacao' AND Tb_Modelo_codigo_modelo = $modelo";
         $resultado2 = mysqli_query($conexao, $sql2);
         if ($resultado2){
             $dados = mysqli_fetch_array($resultado2, MYSQLI_ASSOC);
