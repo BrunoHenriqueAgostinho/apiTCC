@@ -29,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 ('$cnpj', '$nome', '$arquivo', '$margemDireita', '$margemEsquerda', '$margemTopo', '$margemBaixo', '$dtCriacao', '$descricao')";
     $resultado = mysqli_query($conexao, $sql);
     if ($resultado) {
-        http_response_code(201);
+        http_response_code(200);
         echo json_encode(["mensagem" => "Modelo inserido com Sucesso"]);
     } else {
         header("HTTP/1.1 500 Erro no SQL");
