@@ -15,7 +15,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema Academic
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `Academic` DEFAULT CHARACTER SET utf8;
-USE `Academic` ;
+USE `Academic`;
 
 -- -----------------------------------------------------
 -- Table `Academic`.`Tb_Usuario`
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `Academic`.`Tb_Usuario` (
   `descricao_usuario` VARCHAR(255) NULL,
   `foto_usuario` VARCHAR(60) NULL,
   `dtCadastro_usuario` DATE NOT NULL,
-  `tema_usuario` VARCHAR NOT NULL DEFAULT 'lIGHT',
+  `tema_usuario` VARCHAR(40) NOT NULL DEFAULT 'lIGHT',
   `status_usuario` INT NOT NULL DEFAULT 1,
   `contaStatus_usuario` INT NOT NULL DEFAULT 1,
   `email_usuario` VARCHAR(60) NOT NULL,
