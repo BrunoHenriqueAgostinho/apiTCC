@@ -14,8 +14,7 @@
 header("Content-Type: application/json");
 //header("Access-Control-Allow-Origin: *");
 if($_SERVER["REQUEST_METHOD"] == "PUT"){
-    $conexao2 = new PDO("mysql:host=localhost:3306;dbname=academic", 'root', '');
-    
+    require("../conexao.php");    
     $json = file_get_contents("php://input");
     $deco = json_decode($json);
     $cpf = $deco->cpf;
@@ -29,7 +28,7 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
     $telefoneFixo = $deco->telefoneFixo;
     $telefoneCelular = $deco->telefoneCelular;
 
-    $sql = $conexao->prepare("UPDATE tb_usuario SET nome_usuario = :nome, descricao_usuario = :descricao, foto_usuario = :foto, tema_usuario = :tema, status_usuario = :status, telefoneFixo_usuario = :telefoneFixo, telefoneCelular_usuario = :telefoneCelular WHERE cpf_usuario = :cpf");
+    $sql = $conexao2->prepare("UPDATE tb_usuario SET nome_usuario = :nome, descricao_usuario = :descricao, foto_usuario = :foto, tema_usuario = :tema, status_usuario = :status, telefoneFixo_usuario = :telefoneFixo, telefoneCelular_usuario = :telefoneCelular WHERE cpf_usuario = :cpf");
     $sql->bindValue(':nome', $nome, PDO::PARAM_STR);
     $sql->bindValue(':descricao', $descricao, PDO::PARAM_STR);
     $sql->bindValue(':foto', $foto, PDO::PARAM_STR);
