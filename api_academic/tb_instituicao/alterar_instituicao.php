@@ -36,11 +36,11 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
 
     if($status){
         http_response_code(200);
-        $dados = ["mensagem" => "Dados do usuário alterado com sucesso."];
+        $dados = ["mensagem" => "Dados da instituição alterados com sucesso."];
         echo json_encode($dados);
     } else {
-        http_response_code(202);
-        $dados = ["erro"=> "Erro ao alterar dados do usuário."];
+        header("HTTP/1.1 500 Erro no SQL");
+        $dados = ["erro"=> "Erro ao alterar dados da instituição."];
         echo json_encode($dados);
     }
 }

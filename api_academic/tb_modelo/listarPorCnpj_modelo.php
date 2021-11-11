@@ -13,7 +13,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             FROM 
                 tb_instituicao 
             WHERE 
-            Tb_Instituicao_cnpj_instituicao = '$cnpj'";
+                cnpj_instituicao = '$cnpj'";
     $resultado1 = mysqli_query($conexao, $sql1);
     $contador1 = mysqli_num_rows($resultado1);
     if ($contador1 == 0){
