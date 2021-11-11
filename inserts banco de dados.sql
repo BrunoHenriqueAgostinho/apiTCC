@@ -3,7 +3,7 @@ use academic;
 -- Usuários
 INSERT INTO tb_usuario (cpf_usuario, nome_usuario, senha_usuario, descricao_usuario, foto_usuario, dtCadastro_usuario, tema_usuario, status_usuario, contaStatus_usuario, email_usuario, telefoneFixo_usuario, telefoneCelular_usuario) VALUES
 ("11111111111", "Bruno Henrique Agostinho da Silva", "123456789", "Olá, meu nome é Bruno", null, "2021-08-14", "White", status, conta status, email, telefone, celular),
-("22222222222", "Caue Vicentini Ruiz", "987654321", "Olá, meu nome é Caue", null, "2021-08-14",  "Berry", status, conta status, email, telefone, celular,
+("22222222222", "Caue Vicentini Ruiz", "987654321", "Olá, meu nome é Caue", null, "2021-08-14",  "Berry", status, conta status, email, telefone, celular),
 ("33333333333", "Henrique Queiroz de Paula", "13579", "Olá, meu nome é Henrique", null, "2021-08-14",  "Dark", status, conta status, email, telefone, celular),
 ("44444444444", "Jonathan Izidoro", "2468", "Olá, meu nome é Jonathan", null, "2021-08-14", "Ionia", status, conta status, email, telefone, celular);
 
