@@ -8,7 +8,7 @@
 header("Content-Type: application/json");
 //header("Access-Control-Allow-Origin: *");
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $conexao = new PDO("mysql:host=localhost:3306;dbname=academic", 'root', '');
+    $conexao2 = new PDO("mysql:host=localhost:3306;dbname=academic", 'root', '');
     $json = file_get_contents("php://input");
     $deco = json_decode($json);
     $pesquisa = $deco->pesquisa;

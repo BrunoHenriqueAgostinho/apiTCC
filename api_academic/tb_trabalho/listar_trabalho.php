@@ -1,8 +1,4 @@
 <?php
-/*{
-	"pesquisa": "B"
-}*/
-
 header("Content-Type: application/json");
 //header("Access-Control-Allow-Origin: *");
 if($_SERVER["REQUEST_METHOD"] == "GET"){
