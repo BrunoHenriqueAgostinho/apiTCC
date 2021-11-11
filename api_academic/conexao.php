@@ -19,7 +19,6 @@
     $conexao->set_charset("UTF8");
     try{
         $conexao2 = new PDO($dsn, $user, $password);
-        ECHO "GFDST";
     }catch (PDOException $e){
         die($e->getMessage());
     }   

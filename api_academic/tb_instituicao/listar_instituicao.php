@@ -8,13 +8,13 @@
 header("Content-Type: application/json");
 //header("Access-Control-Allow-Origin: *");
 if($_SERVER["REQUEST_METHOD"] == "GET"){
-    $conexao2 = new PDO("mysql:host=localhost:3306;dbname=academic", 'root', '');
+    require("../conexao.php");
     $json = file_get_contents("php://input");
     $deco = json_decode($json);
     $pesquisa = $deco->pesquisa;
     $pesquisa = '%' . $pesquisa . '%';
     
-    $sql = $conexao->prepare("SELECT * FROM tb_instituicao WHERE nome_instituicao like :pesquisa AND contaStatus_instituicao = 1");
+    $sql = $conexao2->prepare("SELECT * FROM tb_instituicao WHERE nome_instituicao like :pesquisa AND contaStatus_instituicao = 1");
     $sql->bindValue(':pesquisa', $pesquisa, PDO::PARAM_STR);
     $status = $sql->execute();
     $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);

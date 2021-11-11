@@ -12,7 +12,8 @@
 header("Content-Type: application/json");
 //header("Access-Controlo-Allow-Origin: *");
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $conexao2 = new PDO("mysql:host=localhost:3306;dbname=academic", 'root', '');
+    require("../conexao.php");
+    //$conexao2 = new PDO("mysql:host=localhost:3306;dbname=academic", 'root', '');
 
     require("../validarCnpj.php");
 
@@ -26,17 +27,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $dtCadastro = date('Y-m-d');
     
     if(validar_cnpj($cnpj)){
-        $sql1 = $conexao->prepare("SELECT * FROM tb_usuario WHERE email_usuario = :email");
+        $sql1 = $conexao2->prepare("SELECT * FROM tb_usuario WHERE email_usuario = :email");
         $sql1->bindValue(':email', $email, PDO::PARAM_STR);
         $sql1->execute();
         $resultado1 = $sql1->fetch(PDO::FETCH_ASSOC);
-        $sql2 = $conexao->prepare("SELECT * FROM tb_instituicao WHERE email_instituicao = :email");
+        $sql2 = $conexao2->prepare("SELECT * FROM tb_instituicao WHERE email_instituicao = :email");
         $sql2->bindValue(':email', $email, PDO::PARAM_STR);
         $sql2->execute();
         $resultado2 = $sql2->fetch(PDO::FETCH_ASSOC);
         if(empty($resultado1) && empty($resultado2)){
             try {
-                $sql = $conexao->prepare("INSERT INTO tb_instituicao(cnpj_instituicao, nome_instituicao, senha_instituicao, dtCadastro_instituicao, email_instituicao) VALUES
+                $sql = $conexao2->prepare("INSERT INTO tb_instituicao(cnpj_instituicao, nome_instituicao, senha_instituicao, dtCadastro_instituicao, email_instituicao) VALUES
                     (:cnpj, :nome, :senha, '$dtCadastro', :email)");
                 $sql->bindValue(':cnpj', $cnpj, PDO::PARAM_INT);
                 $sql->bindValue(':nome', $nome, PDO::PARAM_STR);
@@ -74,29 +75,29 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $dtCadastro = date('Y-m-d');
     $senha = md5($senha_des);
     if(validar_cnpj($cnpj)){
-        $sql1 = $conexao->prepare("SELECT * FROM tb_instituicao WHERE cnpj_instituicao = :cnpj");
+        $sql1 = $conexao2->prepare("SELECT * FROM tb_instituicao WHERE cnpj_instituicao = :cnpj");
         $sql1->bindValue(':cnpj', $cnpj, PDO::PARAM_INT);
         $sql1->execute();
         $resultado1 = $sql1->fetchAll(PDO::FETCH_ASSOC);
         $contador1 = count($resultado1);
         if ($contador1 == 0) {
-            $sql2 = $conexao->prepare("SELECT * FROM tb_contato WHERE email_contato = :email");
+            $sql2 = $conexao2->prepare("SELECT * FROM tb_contato WHERE email_contato = :email");
             $sql2->bindValue(':email', $email, PDO::PARAM_STR);
             $sql2->execute();
             $resultado2 = $sql2->fetchAll(PDO::FETCH_ASSOC);
             $contador2 = count($resultado2);
             if($contador2 == 0){
-                $sql3 = $conexao->prepare("INSERT INTO tb_contato (email_contato) VALUES (:email)");
+                $sql3 = $conexao2->prepare("INSERT INTO tb_contato (email_contato) VALUES (:email)");
                 $sql3->bindValue(':email', $email, PDO::PARAM_STR);
                 $sql3->execute();
                 if($sql3){
-                    $sql4 = $conexao->prepare("SELECT codigo_contato FROM tb_contato WHERE email_contato LIKE :email");
+                    $sql4 = $conexao2->prepare("SELECT codigo_contato FROM tb_contato WHERE email_contato LIKE :email");
                     $sql4->bindValue(':email', $email, PDO::PARAM_STR);
                     $sql4->execute();
                     if($sql4){
                         $resultado4 = $sql4->fetch(PDO::FETCH_ASSOC);
                         $contato = $resultado4["codigo_contato"];
-                        $sql5 = $conexao->prepare("INSERT INTO tb_instituicao(cnpj_instituicao, nome_instituicao, senha_instituicao, dtCadastro_instituicao, Tb_Contato_codigo_contato) VALUES (:cnpj, :nome, :senha, '$dtCadastro', :contato)");
+                        $sql5 = $conexao2->prepare("INSERT INTO tb_instituicao(cnpj_instituicao, nome_instituicao, senha_instituicao, dtCadastro_instituicao, Tb_Contato_codigo_contato) VALUES (:cnpj, :nome, :senha, '$dtCadastro', :contato)");
                         $sql5->bindValue(':cnpj', $cnpj, PDO::PARAM_INT);
                         $sql5->bindValue(':nome', $nome, PDO::PARAM_STR);
                         $sql5->bindValue(':senha', $senha, PDO::PARAM_STR);

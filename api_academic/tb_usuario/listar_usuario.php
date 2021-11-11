@@ -8,7 +8,7 @@
 header("Content-Type: application/json");
 //header("Access-Control-Allow-Origin: *");
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $conexao2 = new PDO("mysql:host=localhost:3306;dbname=academic", 'root', '');
+    require("../conexao.php");
     $json = file_get_contents("php://input");
     $deco = json_decode($json);
     $pesquisa = $deco->pesquisa;
@@ -19,7 +19,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else {
         $pesquisa = '%' . $pesquisa . '%';
 
-        $sql = $conexao->prepare("SELECT cpf_usuario as cpf, nome_usuario as nome, senha_usuario as senha, descricao_usuario as descricao, foto_usuario as foto, dtCadastro_usuario as dtCadastro, tema_usuario as tema, status_usuario as status, contaStatus_usuario as contaStatus, email_usuario as email, telefoneFixo_usuario as telefoneFixo, telefoneCelular_usuario as telefoneCelular FROM tb_usuario WHERE nome_usuario like :pesquisa AND contaStatus_usuario = 1");
+        $sql = $conexao2->prepare("SELECT cpf_usuario as cpf, nome_usuario as nome, senha_usuario as senha, descricao_usuario as descricao, foto_usuario as foto, dtCadastro_usuario as dtCadastro, tema_usuario as tema, status_usuario as status, contaStatus_usuario as contaStatus, email_usuario as email, telefoneFixo_usuario as telefoneFixo, telefoneCelular_usuario as telefoneCelular FROM tb_usuario WHERE nome_usuario like :pesquisa AND contaStatus_usuario = 1");
         $sql->bindValue(':pesquisa', $pesquisa, PDO::PARAM_STR);
         $status = $sql->execute();
         $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
