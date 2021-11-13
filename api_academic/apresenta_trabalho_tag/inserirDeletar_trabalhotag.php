@@ -1,10 +1,4 @@
 <?php
-/*
-{
-	"trabalho": "1",
-	"tag": "4"
-}
-*/
 
 header("Content-Type: application/json");
 //header("Access-Control-Allow-Origin: *");
@@ -61,8 +55,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     echo json_encode(["erro" => "Erro ao inserir tag ao trabalho."]);
                 }
             } else {
-                header("HTTP/1.1 500 Registro existente");
-                echo json_encode(["erro" => "Esse registro já existe."]);
+                $sql2 = "DELETE FROM apresenta_trabalho_tag WHERE Tb_Trabalho_codigo_trabalho = $codigo AND Tb_Tag_codigo_tag = $tag";
+                $resultado2 = mysqli_query($conexao, $sql2);
+                if ($resultado2) {
+                    http_response_code(200);
+                    $dados = ["mensagem" => "Tag deletada com sucesso do trabalho"];
+                    echo json_encode($dados);
+                } else {
+                    header("HTTP/1.1 500 Erro no SQL");
+                    echo json_encode(["erro" => "Erro ao deletar tag do trabalho."]);
+                }
             }
         }
     }

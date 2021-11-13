@@ -5,13 +5,15 @@
 
 header("Content-Type: application/json");
 //header("Access-Control-Allow-Origin: *");
-if($_SERVER["REQUEST_METHOD"] == "GET"){
+if($_SERVER["REQUEST_METHOD"] == "POST"){
     require("../conexao.php");
+    $json = file_get_contents("php://input");
+    $deco = json_decode($json);
+    $codigo = $deco->codigo;
     
-    $sql = "SELECT 
-                codigo_tag as codigo, categoria_tag as categoria
-            FROM 
-                tb_tag";
+    $sql = "SELECT T.codigo_tag as codigo, T.categoria_tag as categoria 
+    FROM tb_tag T, apresenta_trabalho_tag A 
+    WHERE A.Tb_Trabalho_codigo_trabalho = $codigo AND A.Tb_Tag_codigo_tag = T.codigo_tag";
     $resultado = mysqli_query($conexao, $sql);
     $contador = mysqli_num_rows($resultado);
     if ($contador == 0) {
