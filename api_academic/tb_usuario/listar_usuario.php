@@ -17,12 +17,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         header("HTTP/1.1 500 Nenhum valor informado");
         echo json_encode(["erro" => "Nenhum valor informado."]);
     } else {
-        $pesquisa = '%' . $pesquisa . '%';
+        $pesquisa = "'%$pesquisa%'";
 
-        $sql = $conexao2->prepare("SELECT cpf_usuario as cpf, nome_usuario as nome, senha_usuario as senha, descricao_usuario as descricao, foto_usuario as foto, dtCadastro_usuario as dtCadastro, tema_usuario as tema, status_usuario as status, contaStatus_usuario as contaStatus, email_usuario as email, telefoneFixo_usuario as telefoneFixo, telefoneCelular_usuario as telefoneCelular FROM tb_usuario WHERE nome_usuario like :pesquisa AND contaStatus_usuario = 1");
-        $sql->bindValue(':pesquisa', $pesquisa, PDO::PARAM_STR);
-        $status = $sql->execute();
-        $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $sql = "SELECT cpf_usuario as cpf, nome_usuario as nome, senha_usuario as senha, descricao_usuario as descricao, foto_usuario as foto, dtCadastro_usuario as dtCadastro, tema_usuario as tema, status_usuario as status, contaStatus_usuario as contaStatus, email_usuario as email, telefoneFixo_usuario as telefoneFixo, telefoneCelular_usuario as telefoneCelular FROM Tb_Usuario WHERE nome_usuario like $pesquisa AND contaStatus_usuario = 1";
+        $com = $conexao2->prepare($sql);
+        $status = $com->execute();
+        $resultado = $com->fetchAll(PDO::FETCH_ASSOC);
         $contador = count($resultado);
         if ($contador > 0){
             http_response_code(200);
