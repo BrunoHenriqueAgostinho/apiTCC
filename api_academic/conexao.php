@@ -7,7 +7,7 @@
     // $base = "academicoetec";
     // $dsn = "mysql:host={$host};dbname={$base}"; 
     
-    // PARA USAR O SERVIDOR LOCAL DESCOMENTAR ESTA PAGINA
+    // PARA USAR O SERVIDOR LOCAL DESCOMENTAR ESTA PAGINA https://academicapitcc.herokuapp.com/api_academic/tb_tag/listar
     $host = "localhost";
     $user = "root";
     $password = "";
