@@ -1,4 +1,4 @@
 <?php
 
-header('Location: /api_academic/');
+header('Location: api_academic/');
 ?>
