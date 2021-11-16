@@ -1,4 +1,3 @@
 <?php
-
-header('Location: api_academic/');
+echo "Hello World";
 ?>
