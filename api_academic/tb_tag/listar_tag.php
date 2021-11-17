@@ -19,6 +19,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     } else {
         $dados = $resultado->fetch_all(MYSQLI_ASSOC);
         http_response_code(200);
+        print_r($dados);
         echo json_encode($dados, JSON_UNESCAPED_UNICODE);
     }
 } 
