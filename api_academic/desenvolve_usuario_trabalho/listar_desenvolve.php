@@ -30,7 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 T.Tb_Modelo_codigo_modelo as modelo,
                 T.Tb_instituicao_cnpj_instituicao as cnpj 
             FROM
-                tb_trabalho T, desenvolve_usuario_trabalho D
+                Tb_Trabalho T, Desenvolve_Usuario_Trabalho D
             WHERE
                 D.Tb_Usuario_cpf_usuario = $codigo AND T.codigo_trabalho = D.Tb_Trabalho_codigo_trabalho
             ORDER BY T.dtCriacao_trabalho DESC";

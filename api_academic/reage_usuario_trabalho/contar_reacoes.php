@@ -16,7 +16,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $sql1 = "SELECT 
                 *
             FROM 
-                tb_trabalho
+                Tb_Trabalho
             WHERE 
                 codigo_trabalho = " . $codigo;
     $resultado1 = mysqli_query($conexao, $sql1);
@@ -28,7 +28,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
         $sql2 = "SELECT 
                     count(Tb_Usuario_cpf_usuario) AS reacoes
                 FROM 
-                    reage_usuario_trabalho
+                    Reage_Usuario_Trabalho
                 WHERE 
                     Tb_Trabalho_codigo_trabalho = $codigo";
         $resultado2 = mysqli_query($conexao, $sql2);

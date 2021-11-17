@@ -20,7 +20,7 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
     $sql1 = "SELECT 
                 * 
             FROM 
-                desenvolve_usuario_trabalho
+                Desenvolve_Usuario_Trabalho
             WHERE 
                 Tb_Usuario_cpf_usuario = '$cpf'
             AND
@@ -32,7 +32,7 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
         header("HTTP/1.1 500 Relação de desenvolvimento inexistente");
         echo json_encode(["erro" => "Não existe essa relação de desenvolvimento."]);
     } else {
-        $sql2 = "UPDATE desenvolve_usuario_trabalho 
+        $sql2 = "UPDATE Desenvolve_Usuario_Trabalho 
                     SET  
                         cargo_usuario =  '$cargo'
                     WHERE 

@@ -18,7 +18,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $sql1 = "SELECT 
                 *
             FROM 
-                tb_trabalho
+                Tb_Trabalho
             WHERE 
                 codigo_trabalho = $codigo";
     $resultado1 = mysqli_query($conexao, $sql1);
@@ -30,7 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $sql2 = "SELECT 
                     *
                 FROM 
-                    tb_tag
+                    Tb_Tag
                 WHERE 
                     codigo_tag = $tag";
         $resultado2 = mysqli_query($conexao, $sql2);
@@ -42,7 +42,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $sql3 = "SELECT
                         *
                     FROM
-                        apresenta_trabalho_tag
+                        Apresenta_Trabalho_Tag
                     WHERE
                         Tb_Trabalho_codigo_trabalho = $codigo
                     AND
@@ -50,7 +50,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $resultado3 = mysqli_query($conexao, $sql3);
             $contador3 = mysqli_num_rows($resultado3);
             if ($contador3 == 0) {
-                $sql4 = "INSERT apresenta_trabalho_tag (Tb_Trabalho_codigo_trabalho,Tb_Tag_codigo_tag) VALUES 
+                $sql4 = "INSERT Apresenta_Trabalho_Tag (Tb_Trabalho_codigo_trabalho,Tb_Tag_codigo_tag) VALUES 
                             ($codigo, $tag)";
                 $resultado4 = mysqli_query($conexao, $sql4);
                 if ($resultado4) {

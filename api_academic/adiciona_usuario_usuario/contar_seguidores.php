@@ -11,7 +11,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $sql1 = "SELECT 
                 *
             FROM 
-                tb_usuario
+                Tb_Usuario
             WHERE 
                 cpf_usuario = '$cpf'";
     $resultado1 = mysqli_query($conexao, $sql1);
@@ -23,7 +23,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $sql2 = "SELECT
                     count(seguidor_usuario) as seguidores 
                 FROM 
-                    adiciona_usuario_usuario 
+                    Adiciona_Usuario_Usuario 
                 WHERE 
                     seguido_usuario = '$cpf'";
         $resultado2 = mysqli_query($conexao, $sql2);

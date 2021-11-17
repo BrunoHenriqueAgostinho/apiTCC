@@ -32,7 +32,7 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
     $sql1 = "SELECT 
                 *
             FROM 
-                tb_trabalho 
+                Tb_Trabalho 
             WHERE 
                 codigo_trabalho  = " . $codigo;
     $resultado1 = mysqli_query($conexao, $sql1);
@@ -42,11 +42,54 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
         echo json_encode(["erro" => "Esse trabalho não existe."]);
     } else {
         if(empty($cnpj) && empty($avaliacao)){
-            $sql2 = "UPDATE tb_trabalho SET nome_trabalho = '$nome', descricao_trabalho = '$descricao', arquivo_trabalho = '$arquivo', margemDireita_trabalho = '$margemDireita', margemEsquerda_trabalho = '$margemEsquerda', margemTopo_trabalho = '$margemTopo', margemBaixo_trabalho = '$margemBaixo',  finalizado_trabalho = $finalizado, dtAlteracao_trabalho = '$dtAlteracao' WHERE codigo_trabalho = $codigo";
+            $sql2 = "UPDATE 
+                        Tb_Trabalho 
+                    SET 
+                        nome_trabalho = '$nome', 
+                        descricao_trabalho = '$descricao', 
+                        arquivo_trabalho = '$arquivo', 
+                        margemDireita_trabalho = '$margemDireita', 
+                        margemEsquerda_trabalho = '$margemEsquerda', 
+                        margemTopo_trabalho = '$margemTopo', 
+                        margemBaixo_trabalho = '$margemBaixo',  
+                        finalizado_trabalho = $finalizado, 
+                        dtAlteracao_trabalho = '$dtAlteracao' 
+                    WHERE 
+                        codigo_trabalho = $codigo";
+
         } else if (empty($avaliacao)){
-            $sql2 = "UPDATE tb_trabalho SET nome_trabalho = '$nome', descricao_trabalho = '$descricao', arquivo_trabalho = '$arquivo', margemDireita_trabalho = '$margemDireita', margemEsquerda_trabalho = '$margemEsquerda', margemTopo_trabalho = '$margemTopo', margemBaixo_trabalho = '$margemBaixo', finalizado_trabalho = $finalizado, dtAlteracao_trabalho = '$dtAlteracao', Tb_Instituicao_cnpj_instituicao = '$cnpj' WHERE codigo_trabalho = $codigo";
+            $sql2 = "UPDATE 
+                        Tb_Trabalho 
+                    SET 
+                        nome_trabalho = '$nome', 
+                        descricao_trabalho = '$descricao', 
+                        arquivo_trabalho = '$arquivo', 
+                        margemDireita_trabalho = '$margemDireita', 
+                        margemEsquerda_trabalho = '$margemEsquerda', 
+                        margemTopo_trabalho = '$margemTopo', 
+                        margemBaixo_trabalho = '$margemBaixo', 
+                        finalizado_trabalho = $finalizado, 
+                        dtAlteracao_trabalho = '$dtAlteracao', 
+                        Tb_Instituicao_cnpj_instituicao = '$cnpj' 
+                    WHERE 
+                        codigo_trabalho = $codigo";
         } else {
-            $sql2 = "UPDATE tb_trabalho SET nome_trabalho = '$nome', descricao_trabalho = '$descricao', arquivo_trabalho = '$arquivo', margemDireita_trabalho = '$margemDireita', margemEsquerda_trabalho = '$margemEsquerda', margemTopo_trabalho = '$margemTopo', margemBaixo_trabalho = '$margemBaixo', finalizado_trabalho = $finalizado, dtAlteracao_trabalho = '$dtAlteracao', Tb_Instituicao_cnpj_instituicao = '$cnpj', avaliacao_trabalho = '$avaliacao' WHERE codigo_trabalho = $codigo";
+            $sql2 = "UPDATE 
+                        Tb_Trabalho 
+                    SET 
+                        nome_trabalho = '$nome', 
+                        descricao_trabalho = '$descricao', 
+                        arquivo_trabalho = '$arquivo', 
+                        margemDireita_trabalho = '$margemDireita', 
+                        margemEsquerda_trabalho = '$margemEsquerda', 
+                        margemTopo_trabalho = '$margemTopo', 
+                        margemBaixo_trabalho = '$margemBaixo', 
+                        finalizado_trabalho = $finalizado, 
+                        dtAlteracao_trabalho = '$dtAlteracao', 
+                        Tb_Instituicao_cnpj_instituicao = '$cnpj', 
+                        avaliacao_trabalho = '$avaliacao' 
+                    WHERE 
+                        codigo_trabalho = $codigo"; 
         }
 
         $resultado2 = mysqli_query($conexao, $sql2);

@@ -14,7 +14,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $pesquisa = $deco->pesquisa;
     $pesquisa = '%' . $pesquisa . '%';
     
-    $sql = $conexao2->prepare("SELECT * FROM tb_instituicao WHERE nome_instituicao like :pesquisa AND contaStatus_instituicao = 1");
+    $sql = $conexao2->prepare("SELECT * FROM Tb_Instituicao WHERE nome_instituicao like :pesquisa AND contaStatus_instituicao = 1");
     $sql->bindValue(':pesquisa', $pesquisa, PDO::PARAM_STR);
     $status = $sql->execute();
     $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);

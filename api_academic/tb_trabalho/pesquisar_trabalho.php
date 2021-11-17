@@ -29,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             Tb_Modelo_codigo_modelo as modelo,
             Tb_instituicao_cnpj_instituicao as cnpj
         FROM 
-            tb_trabalho
+            Tb_Trabalho
         WHERE 
             finalizado_trabalho = 1 AND nome_trabalho LIKE '%$pesquisa%'";
 

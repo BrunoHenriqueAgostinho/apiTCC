@@ -13,7 +13,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $deco = json_decode($json);
     $cnpj = $deco->cnpj;
 
-    $sql = "UPDATE tb_instituicao SET contaStatus_instituicao = 0 WHERE cnpj_instituicao = '$cnpj'";
+    $sql = "UPDATE Tb_Instituicao SET contaStatus_instituicao = 0 WHERE cnpj_instituicao = '$cnpj'";
     $resultado = mysqli_query($conexao, $sql);
     echo json_encode(["mensagem" => "Instituição deletada com sucesso."]);
 }

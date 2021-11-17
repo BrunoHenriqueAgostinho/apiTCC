@@ -24,7 +24,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 D.Tb_Trabalho_codigo_trabalho as codigo,
                 D.cargo_usuario as cargo
             FROM
-                tb_usuario U, desenvolve_usuario_trabalho D
+                Tb_Usuario U, Desenvolve_Usuario_Trabalho D
             WHERE
                 D.Tb_Trabalho_codigo_trabalho = $codigo AND U.cpf_usuario = D.Tb_Usuario_cpf_usuario";
                 //D.Tb_Trabalho_codigo_trabalho = $codigo AND U.cpf_usuario = D.Tb_Usuario_cpf_usuario

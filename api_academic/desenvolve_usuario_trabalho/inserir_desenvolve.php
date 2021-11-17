@@ -20,7 +20,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $sql1 = "SELECT 
                 * 
             FROM 
-                tb_usuario 
+                Tb_Usuario 
             WHERE 
                 cpf_usuario = '$cpf'";
     $resultado1 = mysqli_query($conexao, $sql1);
@@ -29,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $sql2 = "SELECT 
                 * 
             FROM 
-                tb_trabalho 
+                Tb_Trabalho 
             WHERE 
                 codigo_trabalho = $codigo";
     $resultado2 = mysqli_query($conexao, $sql2);
@@ -46,7 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $sql3 = "SELECT 
                         * 
                     FROM 
-                        desenvolve_usuario_trabalho
+                        Desenvolve_Usuario_Trabalho
                     WHERE 
                         Tb_Usuario_cpf_usuario = '$cpf'
                     AND
@@ -54,7 +54,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $resultado3 = mysqli_query($conexao, $sql3);
             $contador3 = mysqli_num_rows($resultado3);
             if ($contador3 == 0){
-                $sql4 = "INSERT INTO desenvolve_usuario_trabalho (Tb_Usuario_cpf_usuario, Tb_Trabalho_codigo_trabalho, cargo_usuario) VALUES
+                $sql4 = "INSERT INTO Desenvolve_Usuario_Trabalho (Tb_Usuario_cpf_usuario, Tb_Trabalho_codigo_trabalho, cargo_usuario) VALUES
                             ('$cpf', $codigo, $cargo)";
                 $resultado4 = mysqli_query($conexao, $sql4);
                 if ($resultado4) {

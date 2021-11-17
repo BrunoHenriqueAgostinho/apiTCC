@@ -16,7 +16,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
                 seguidor_usuario,
                 seguido_usuario
             FROM 
-                adiciona_usuario_usuario 
+                Adiciona_Usuario_Usuario 
             WHERE 
                 seguidor_usuario = '$cpf_seguidor'
             AND
@@ -27,7 +27,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
         header("HTTP/1.1 201 Amigo inexistente");
         echo json_encode(["erro" => "Não existe esse amigo."]);
     } else {
-        $sql2 = "DELETE FROM adiciona_usuario_usuario 
+        $sql2 = "DELETE FROM Adiciona_Usuario_Usuario 
                 WHERE 
                     seguidor_usuario = '$cpf_seguidor' 
                 AND

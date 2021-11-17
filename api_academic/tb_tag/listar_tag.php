@@ -8,7 +8,8 @@ header("Content-Type: application/json");
 if($_SERVER["REQUEST_METHOD"] == "GET"){
     require("../conexao.php");
     $sql = "SELECT 
-                codigo_tag as codigo, categoria_tag as categoria
+                codigo_tag as codigo, 
+                categoria_tag as categoria
             FROM 
                 Tb_Tag";
     $resultado = mysqli_query($conexao, $sql);
@@ -19,7 +20,6 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     } else {
         $dados = $resultado->fetch_all(MYSQLI_ASSOC);
         http_response_code(200);
-        print_r($dados);
         echo json_encode($dados, JSON_UNESCAPED_UNICODE);
     }
 } 

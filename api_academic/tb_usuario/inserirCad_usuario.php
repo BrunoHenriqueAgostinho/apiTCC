@@ -24,18 +24,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $dtCadastro = date('Y-m-d');
 
     if(validaCPF($cpf)){
-        $sql1 = $conexao2->prepare("SELECT * FROM tb_usuario WHERE email_usuario = :email");
+        $sql1 = $conexao2->prepare("SELECT * FROM Tb_Usuario WHERE email_usuario = :email");
         $sql1->bindValue(':email', $email, PDO::PARAM_STR);
         $sql1->execute();
         $resultado1 = $sql1->fetch(PDO::FETCH_ASSOC);
-        $sql2 = $conexao2->prepare("SELECT * FROM tb_instituicao WHERE email_instituicao = :email");
+        $sql2 = $conexao2->prepare("SELECT * FROM Tb_Instituicao WHERE email_instituicao = :email");
         $sql2->bindValue(':email', $email, PDO::PARAM_STR);
         $sql2->execute();
         $resultado2 = $sql2->fetch(PDO::FETCH_ASSOC);
         if(empty($resultado1) && empty($resultado2)){
             try {
-                $sql = $conexao2->prepare("INSERT INTO tb_usuario(cpf_usuario, nome_usuario, senha_usuario, dtCadastro_usuario, email_usuario) VALUES
-                    (:cpf, :nome, :senha, '$dtCadastro', :email)");
+                $sql = $conexao2->prepare("INSERT INTO 
+                                                Tb_Usuario(
+                                                    cpf_usuario, 
+                                                    nome_usuario, 
+                                                    senha_usuario, 
+                                                    dtCadastro_usuario, 
+                                                    email_usuario
+                                                ) 
+                                            VALUES
+                                                (
+                                                    :cpf, 
+                                                    :nome, 
+                                                    :senha, 
+                                                    '$dtCadastro', 
+                                                    :email
+                                                )");
+                                                
                 $sql->bindValue(':cpf', $cpf, PDO::PARAM_INT);
                 $sql->bindValue(':nome', $nome, PDO::PARAM_STR);
                 $sql->bindValue(':senha', $senha, PDO::PARAM_STR);

@@ -11,9 +11,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $deco = json_decode($json);
     $codigo = $deco->codigo;
     
-    $sql = "SELECT T.codigo_tag as codigo, T.categoria_tag as categoria 
-    FROM tb_tag T, apresenta_trabalho_tag A 
-    WHERE A.Tb_Trabalho_codigo_trabalho = $codigo AND A.Tb_Tag_codigo_tag = T.codigo_tag";
+    $sql = "SELECT 
+                T.codigo_tag as codigo, 
+                T.categoria_tag as categoria 
+            FROM 
+                Tb_Tag T, 
+                Apresenta_Trabalho_Tag A 
+            WHERE 
+                A.Tb_Trabalho_codigo_trabalho = $codigo 
+            AND 
+                A.Tb_Tag_codigo_tag = T.codigo_tag";
+
     $resultado = mysqli_query($conexao, $sql);
     $contador = mysqli_num_rows($resultado);
     if ($contador == 0) {

@@ -11,7 +11,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $sql1 = "SELECT 
                 *
             FROM 
-                tb_trabalho 
+                Tb_Trabalho 
             WHERE 
                 codigo_trabalho  = " . $codigo;
 
@@ -23,7 +23,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else {
         //Delete tb_desenvolve - Trabalho
         $sql2  = "DELETE FROM
-                            desenvolve_usuario_trabalho
+                            Desenvolve_Usuario_Trabalho
                         WHERE
                             Tb_Trabalho_codigo_trabalho = $codigo";
 
@@ -31,7 +31,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if ($resultado2) {
             //Delete tb_reag - Trabalho
             $sql3  = "DELETE FROM
-                            reage_usuario_trabalho
+                            Reage_Usuario_Trabalho
                         WHERE
                             Tb_Trabalho_codigo_trabalho = $codigo";
 
@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             if ($resultado3) {
                 //Delete tb_tag - Trabalho
                 $sql4  = "DELETE FROM
-                            apresenta_trabalho_tag
+                            Apresenta_Trabalho_Tag
                         WHERE
                             Tb_Trabalho_codigo_trabalho = " . $codigo;
 
@@ -47,7 +47,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 if ($resultado4) {
                     //Delete tb_trabalho - Trabalho
                     $sql5 = "DELETE FROM 
-                                tb_trabalho 
+                                Tb_Trabalho 
                             WHERE 
                                 codigo_trabalho = " . $codigo; 
 

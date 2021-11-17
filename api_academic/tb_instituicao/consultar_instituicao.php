@@ -12,7 +12,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $deco = json_decode($json);
     $cnpj = $deco->cnpj;
 
-    $sql = "SELECT cnpj_instituicao as cnpj, nome_instituicao as nome, logotipo_instituicao as logotipo, dtCadastro_instituicao as dtCadastro, senha_instituicao as senha, contaStatus_instituicao as contaStatus, email_instituicao as email, telefoneFixo_instituicao as telefoneFixo, telefoneCelular_instituicao as telefoneCelular, cidade_instituicao as cidade FROM tb_instituicao WHERE cnpj_instituicao = $cnpj";
+    $sql = "SELECT 
+                cnpj_instituicao as cnpj, 
+                nome_instituicao as nome, 
+                logotipo_instituicao as logotipo, 
+                dtCadastro_instituicao as dtCadastro, 
+                senha_instituicao as senha, 
+                contaStatus_instituicao as contaStatus, 
+                email_instituicao as email, 
+                telefoneFixo_instituicao as telefoneFixo, 
+                telefoneCelular_instituicao as telefoneCelular, 
+                cidade_instituicao as cidade 
+            FROM 
+                Tb_Instituicao 
+            WHERE 
+                cnpj_instituicao = $cnpj";
+                
     $resultado = mysqli_query($conexao, $sql);
     $contador = mysqli_num_rows($resultado);
     if ($contador == 0) {

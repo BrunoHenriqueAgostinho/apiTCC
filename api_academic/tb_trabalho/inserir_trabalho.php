@@ -29,13 +29,44 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $dtAlteracao = date('Y-m-d');
     $modelo = $deco->modelo;
 
-    $sql1 = "SELECT codigo_trabalho as codigo FROM tb_trabalho WHERE codigo_trabalho = (SELECT MAX(codigo_trabalho) FROM tb_trabalho)";
+    $sql1 = "SELECT 
+                codigo_trabalho as codigo 
+            FROM 
+                Tb_Trabalho 
+            WHERE 
+                codigo_trabalho = (SELECT MAX(codigo_trabalho) FROM Tb_Trabalho)";
     $resultado1 = mysqli_query($conexao, $sql1);
     $dados1 = mysqli_fetch_array($resultado1, MYSQLI_ASSOC);
     $codigo = $dados1["codigo"] + 1;
 
-    $sql2 = "INSERT INTO tb_trabalho (codigo_trabalho, nome_trabalho, descricao_trabalho, arquivo_trabalho, margemDireita_trabalho, margemEsquerda_trabalho, margemTopo_trabalho, margemBaixo_trabalho, dtCriacao_trabalho, dtAlteracao_trabalho,  Tb_Modelo_codigo_modelo) VALUES
-                ($codigo, '$nome', '$descricao', '$arquivo', '$margemDireita', '$margemEsquerda', '$margemTopo', '$margemBaixo', '$dtCriacao', '$dtAlteracao', $modelo)";
+    $sql2 = "INSERT INTO 
+                Tb_Trabalho (
+                    codigo_trabalho, 
+                    nome_trabalho, 
+                    descricao_trabalho, 
+                    arquivo_trabalho, 
+                    margemDireita_trabalho, 
+                    margemEsquerda_trabalho, 
+                    margemTopo_trabalho, 
+                    margemBaixo_trabalho, 
+                    dtCriacao_trabalho, 
+                    dtAlteracao_trabalho,  
+                    Tb_Modelo_codigo_modelo
+                ) 
+            VALUES
+                (
+                    $codigo, 
+                    '$nome', 
+                    '$descricao', 
+                    '$arquivo', 
+                    '$margemDireita', 
+                    '$margemEsquerda', 
+                    '$margemTopo', 
+                    '$margemBaixo', 
+                    '$dtCriacao', 
+                    '$dtAlteracao', 
+                    $modelo
+                )";
     $resultado2 = mysqli_query($conexao, $sql2);
     
     if ($resultado2) {

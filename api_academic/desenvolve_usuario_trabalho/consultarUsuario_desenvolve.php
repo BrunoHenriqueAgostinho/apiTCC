@@ -12,7 +12,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $sql = "SELECT 
                 count(Tb_Usuario_cpf_usuario) as usuario
             FROM
-                desenvolve_usuario_trabalho
+                Desenvolve_Usuario_Trabalho
             WHERE
                 Tb_Usuario_cpf_usuario = $cpf AND Tb_Trabalho_codigo_trabalho = $codigo";
     $resultado = mysqli_query($conexao, $sql);

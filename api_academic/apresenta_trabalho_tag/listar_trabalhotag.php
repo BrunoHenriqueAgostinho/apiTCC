@@ -14,7 +14,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $sql1 = "SELECT 
                 *
             FROM 
-                tb_trabalho
+                Tb_Trabalho
             WHERE 
                 codigo_trabalho = $codigo";
     $resultado1 = mysqli_query($conexao, $sql1);
@@ -26,8 +26,8 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
         $sql2 = "SELECT 
                     Tag.categoria_tag 
                 FROM 
-                    apresenta_trabalho_tag TT, 
-                    tb_tag Tag 
+                    Apresenta_Trabalho_Tag TT, 
+                    Tb_Tag Tag 
                 WHERE 
                     TT.Tb_Trabalho_codigo_trabalho = $codigo 
                 AND 

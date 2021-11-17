@@ -13,7 +13,7 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
     $sql1 = "SELECT 
                 *
             FROM 
-                tb_trabalho 
+                Tb_Trabalho 
             WHERE 
                 codigo_trabalho  = " . $codigo;
     $resultado1 = mysqli_query($conexao, $sql1);
@@ -22,7 +22,15 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
         header("HTTP/1.1 500 Registro inexistente.");
         echo json_encode(["erro" => "Esse trabalho não existe."]);
     } else { 
-        $sql2 = "UPDATE tb_trabalho SET finalizado_trabalho = $finalizado, dtAlteracao_trabalho = '$dt', dtPublicacao_trabalho = '$dt' WHERE codigo_trabalho = $codigo";
+        $sql2 = "UPDATE 
+                    Tb_Trabalho 
+                SET 
+                    finalizado_trabalho = $finalizado, 
+                    dtAlteracao_trabalho = '$dt', 
+                    dtPublicacao_trabalho = '$dt' 
+                WHERE 
+                    codigo_trabalho = $codigo";
+                    
         $resultado2 = mysqli_query($conexao, $sql2);
         if ($resultado2) {
             http_response_code(200);

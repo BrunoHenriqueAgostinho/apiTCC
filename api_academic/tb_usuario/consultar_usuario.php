@@ -13,7 +13,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $deco = json_decode($json);
     $cpf = $deco->cpf;
 
-    $sql = "SELECT cpf_usuario as cpf, nome_usuario as nome, senha_usuario as senha, descricao_usuario as descricao, foto_usuario as foto, dtCadastro_usuario as dtCadastro, tema_usuario as tema, status_usuario as status, contaStatus_usuario as contaStatus, email_usuario as email, telefoneFixo_usuario as telefoneFixo, telefoneCelular_usuario as telefoneCelular FROM tb_usuario WHERE cpf_usuario = $cpf";
+    $sql = "SELECT 
+                cpf_usuario as cpf, 
+                nome_usuario as nome, 
+                senha_usuario as senha, 
+                descricao_usuario as descricao, 
+                foto_usuario as foto, 
+                dtCadastro_usuario as dtCadastro, 
+                tema_usuario as tema, 
+                status_usuario as status, 
+                contaStatus_usuario as contaStatus, 
+                email_usuario as email, 
+                telefoneFixo_usuario as telefoneFixo, 
+                telefoneCelular_usuario as telefoneCelular 
+            FROM 
+                Tb_Usuario 
+            WHERE 
+                cpf_usuario = $cpf";
+                
     $resultado = mysqli_query($conexao, $sql);
     $contador = mysqli_num_rows($resultado);
     if ($contador == 0) {

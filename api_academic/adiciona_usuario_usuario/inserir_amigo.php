@@ -18,7 +18,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $sql1 = "SELECT 
                 *
             FROM 
-                tb_usuario
+                Tb_Usuario
             WHERE 
                 cpf_usuario = '$cpf_seguidor'";
     $resultado1 = mysqli_query($conexao, $sql1);
@@ -27,7 +27,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $sql2 = "SELECT 
                 *
             FROM 
-                tb_usuario
+                Tb_Usuario
             WHERE 
                 cpf_usuario = '$cpf_seguido'";
     $resultado2 = mysqli_query($conexao, $sql2);
@@ -37,7 +37,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         header("HTTP/1.1 500 Erro no SQL");
         echo json_encode(["erro" => "Erro ao consultar usuários."]);
     } else {
-        $sql3 = "INSERT INTO adiciona_usuario_usuario (seguidor_usuario, seguido_usuario) VALUES
+        $sql3 = "INSERT INTO Adiciona_Usuario_Usuario (seguidor_usuario, seguido_usuario) VALUES
                     ('$cpf_seguidor', '$cpf_seguido')";
         $resultado3 = mysqli_query($conexao, $sql3);
         if ($resultado3) {

@@ -28,7 +28,19 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
     $telefoneFixo = $deco->telefoneFixo;
     $telefoneCelular = $deco->telefoneCelular;
 
-    $sql = $conexao2->prepare("UPDATE tb_usuario SET nome_usuario = :nome, descricao_usuario = :descricao, foto_usuario = :foto, tema_usuario = :tema, status_usuario = :status, telefoneFixo_usuario = :telefoneFixo, telefoneCelular_usuario = :telefoneCelular WHERE cpf_usuario = :cpf");
+    $sql = $conexao2->prepare("UPDATE 
+                                Tb_Usuario 
+                            SET 
+                                nome_usuario = :nome, 
+                                descricao_usuario = :descricao, 
+                                foto_usuario = :foto, 
+                                tema_usuario = :tema, 
+                                status_usuario = :status, 
+                                telefoneFixo_usuario = :telefoneFixo, 
+                                telefoneCelular_usuario = :telefoneCelular 
+                            WHERE 
+                                cpf_usuario = :cpf");
+                                
     $sql->bindValue(':nome', $nome, PDO::PARAM_STR);
     $sql->bindValue(':descricao', $descricao, PDO::PARAM_STR);
     $sql->bindValue(':foto', $foto, PDO::PARAM_STR);

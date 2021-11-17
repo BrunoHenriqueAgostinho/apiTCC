@@ -13,7 +13,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $deco = json_decode($json);
     $cpf = $deco->cpf;
 
-    $sql = "UPDATE tb_usuario SET contaStatus_usuario = 0 WHERE cpf_usuario = '$cpf'";
+    $sql = "UPDATE Tb_Usuario SET contaStatus_usuario = 0 WHERE cpf_usuario = '$cpf'";
     $resultado = mysqli_query($conexao, $sql);
     echo json_encode(["mensagem" => "Usuário deletado com sucesso."]);
 }

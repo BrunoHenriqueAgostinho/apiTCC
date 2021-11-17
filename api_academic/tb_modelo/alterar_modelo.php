@@ -29,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
     $sql1 = "SELECT
                 *
             FROM
-                tb_modelo
+                Tb_Modelo
             WHERE
                 codigo_modelo = $codigo";
     $resultado1 = mysqli_query($conexao, $sql1);
@@ -38,7 +38,7 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
         header("HTTP/1.1 500 Registro inexistente.");
         echo json_encode(["erro" => "Esse modelo não existe."]);
     } else {
-        $sql2 = "UPDATE tb_modelo 
+        $sql2 = "UPDATE Tb_Modelo 
                     SET  
                         Tb_Instituicao_cnpj_instituicao =  '$cnpj',
                         nome_modelo = '$nome', 

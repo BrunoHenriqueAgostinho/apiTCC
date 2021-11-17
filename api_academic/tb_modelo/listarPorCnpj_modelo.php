@@ -11,7 +11,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $sql1 = "SELECT 
                 * 
             FROM 
-                tb_instituicao 
+                Tb_Instituicao 
             WHERE 
                 cnpj_instituicao = '$cnpj'";
     $resultado1 = mysqli_query($conexao, $sql1);
@@ -21,9 +21,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         echo json_encode(["erro" => "Não encontramos essa instituição."]);
     } else {
         $sql2 = "SELECT 
-                    codigo_modelo as codigo, nome_modelo as nome, arquivo_modelo as arquivo, margemDireita_modelo as margemDireita, margemEsquerda_modelo as margemEsquerda, margemTopo_modelo as margemTopo, margemBaixo_modelo as margemBaixo, dtCriacao_modelo as dtCriacao, descricao_modelo as descricao, Tb_instituicao_cnpj_instituicao as cnpj 
+                    codigo_modelo as codigo, 
+                    nome_modelo as nome, 
+                    arquivo_modelo as arquivo, 
+                    margemDireita_modelo as margemDireita, 
+                    margemEsquerda_modelo as margemEsquerda, 
+                    margemTopo_modelo as margemTopo, 
+                    margemBaixo_modelo as margemBaixo, 
+                    dtCriacao_modelo as dtCriacao, 
+                    descricao_modelo as descricao, 
+                    Tb_instituicao_cnpj_instituicao as cnpj 
                 FROM 
-                    tb_modelo 
+                    Tb_Modelo 
                 WHERE
                     Tb_Instituicao_cnpj_instituicao = '$cnpj'";
         $resultado2 = mysqli_query($conexao, $sql2);

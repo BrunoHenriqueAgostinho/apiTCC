@@ -18,7 +18,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $sql1 = "SELECT 
                 *
             FROM 
-                tb_usuario
+                Tb_Usuario
             WHERE 
                 cpf_usuario = '$cpf_seguidor'";
     $resultado1 = mysqli_query($conexao, $sql1);
@@ -27,7 +27,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $sql2 = "SELECT 
                 *
             FROM 
-                tb_usuario
+                Tb_Usuario
             WHERE 
                 cpf_usuario = '$cpf_seguido'";
     $resultado2 = mysqli_query($conexao, $sql2);
@@ -41,7 +41,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
                     seguidor_usuario,
                     seguido_usuario
                 FROM 
-                    adiciona_usuario_usuario 
+                    Adiciona_Usuario_Usuario 
                 WHERE 
                     seguido_usuario = '$cpf_seguido' 
                 AND 

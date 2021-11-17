@@ -12,7 +12,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $codigo = $deco->codigo;
 
     $sql1 = "UPDATE 
-                tb_trabalho 
+                Tb_Trabalho 
             SET 
                 Tb_Modelo_codigo_modelo = 1 
             WHERE 
@@ -20,7 +20,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $resultado1 = mysqli_query($conexao, $sql1);
 
     if($resultado1) {
-        $sql2 = "DELETE FROM tb_modelo WHERE codigo_modelo = $codigo";
+        $sql2 = "DELETE FROM Tb_Modelo WHERE codigo_modelo = $codigo";
         $resultado2 = mysqli_query($conexao, $sql2);
 
         if ($resultado2) {

@@ -18,7 +18,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $sql1 = "SELECT 
                 *
             FROM 
-                reage_usuario_trabalho
+                Reage_Usuario_Trabalho
             WHERE 
                 Tb_Usuario_cpf_usuario = '$cpf'
             AND
@@ -26,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $resultado1 = mysqli_query($conexao, $sql1);
     $contador = mysqli_num_rows($resultado1);
     if ($contador == 0) {
-        $sql2 = "INSERT INTO reage_usuario_trabalho (Tb_Usuario_cpf_usuario, Tb_Trabalho_codigo_trabalho) VALUES
+        $sql2 = "INSERT INTO Reage_Usuario_Trabalho (Tb_Usuario_cpf_usuario, Tb_Trabalho_codigo_trabalho) VALUES
                     ('$cpf', $codigo)";
         $resultado2 = mysqli_query($conexao, $sql2);
         if ($resultado2) {

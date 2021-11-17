@@ -10,14 +10,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $senha_des = $deco->senha;
     $senha = md5($senha_des);
 
-    $sql1 = $conexao2->prepare("SELECT cpf_usuario, email_usuario, senha_usuario FROM tb_usuario WHERE email_usuario = :email AND senha_usuario = :senha");
+    $sql1 = $conexao2->prepare("SELECT cpf_usuario, email_usuario, senha_usuario FROM Tb_Usuario WHERE email_usuario = :email AND senha_usuario = :senha");
     $sql1->bindValue(':email', $email, PDO::PARAM_STR);
     $sql1->bindValue(':senha', $senha, PDO::PARAM_STR);
     $sql1->execute();
     $resultado1 = $sql1->fetch(PDO::FETCH_ASSOC);
     //print_r($resultado1);
     if (empty($resultado1)){
-        $sql2 = $conexao2->prepare("SELECT cnpj_instituicao, email_instituicao, senha_instituicao FROM tb_instituicao WHERE email_instituicao = :email AND senha_instituicao = :senha");
+        $sql2 = $conexao2->prepare("SELECT cnpj_instituicao, email_instituicao, senha_instituicao FROM Tb_Instituicao WHERE email_instituicao = :email AND senha_instituicao = :senha");
         $sql2->bindValue(':email', $email, PDO::PARAM_STR);
         $sql2->bindValue(':senha', $senha, PDO::PARAM_STR);
         $sql2->execute();

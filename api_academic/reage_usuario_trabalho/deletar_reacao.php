@@ -15,7 +15,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $sql1 = "SELECT 
                 *
             FROM 
-                reage_usuario_trabalho
+                Reage_Usuario_Trabalho
             WHERE 
                 Tb_Usuario_cpf_usuario = '$cpf'
             AND
@@ -26,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
         header("HTTP/1.1 201 Reação inexistente");
         echo json_encode(["erro" => "Não há nenhuma reação."]);
     } else {
-        $sql = "DELETE FROM reage_usuario_trabalho WHERE Tb_Usuario_cpf_usuario = '$cpf' AND Tb_Trabalho_codigo_trabalho = $codigo";
+        $sql = "DELETE FROM Reage_Usuario_Trabalho WHERE Tb_Usuario_cpf_usuario = '$cpf' AND Tb_Trabalho_codigo_trabalho = $codigo";
         $resultado = mysqli_query($conexao, $sql);
         if ($resultado) {
             http_response_code(200);

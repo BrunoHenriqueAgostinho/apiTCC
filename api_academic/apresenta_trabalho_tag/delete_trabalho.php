@@ -17,7 +17,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $sql1 = "SELECT
                 *
             FROM
-                apresenta_trabalho_tag
+                Apresenta_Trabalho_Tag
             WHERE
                 Tb_Trabalho_codigo_trabalho = $trabalho
             AND
@@ -28,7 +28,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
         header("HTTP/1.1 500 Registro inexistente");
         echo json_encode(["erro" => "Esse registro não existe."]);
     } else {
-        $sql2 = "DELETE FROM apresenta_trabalho_tag WHERE Tb_Trabalho_codigo_trabalho = $trabalho AND Tb_Tag_codigo_tag = $tag";
+        $sql2 = "DELETE FROM Apresenta_Trabalho_Tag WHERE Tb_Trabalho_codigo_trabalho = $trabalho AND Tb_Tag_codigo_tag = $tag";
         $resultado2 = mysqli_query($conexao, $sql2);
         if ($resultado2) {
             http_response_code(200);
