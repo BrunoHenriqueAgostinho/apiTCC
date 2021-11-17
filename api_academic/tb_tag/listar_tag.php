@@ -7,7 +7,6 @@ header("Content-Type: application/json");
 //header("Access-Control-Allow-Origin: *");
 if($_SERVER["REQUEST_METHOD"] == "GET"){
     require("../conexao.php");
-    echo "dsafdsafdasfs";
     $sql = "SELECT 
                 codigo_tag as codigo, categoria_tag as categoria
             FROM 
