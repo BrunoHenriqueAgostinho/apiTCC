@@ -1,10 +1,14 @@
 <?php
     //academicoetec.mysql.dbaas.com.br caso o ip nao esteja funcionando
     // PARA USAR A CONEXAO COM O SERVIDOR UTILIZE DESCOMENTE ESSA PARTE
-    $host = "179.188.16.2"; 
-    $user = "academicoetec";
-    $password = "TCC!@#010203";
-    $base = "academicoetec";
+    // host far from  home
+    $host = "201.62.65.6"; 
+    // host local na escola
+    // $host = "172.16.20.100"; 
+    
+    $user = "academic";
+    $password = "Academic@2021";
+    $base = "academic";
     $dsn = "mysql:host={$host};dbname={$base}"; 
     
     // PARA USAR O SERVIDOR LOCAL DESCOMENTAR ESTA PAGINA https://academicapitcc.herokuapp.com/api_academic/tb_tag/listar

@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema Academic
+-- Schema academic
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema Academic
+-- Schema academic
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `Academic` DEFAULT CHARACTER SET utf8;
-USE `Academic`;
+CREATE SCHEMA IF NOT EXISTS `academic` DEFAULT CHARACTER SET utf8;
+USE `academic`;
 
 -- -----------------------------------------------------
--- Table `Academic`.`Tb_Usuario`
+-- Table `academic`.`Tb_Usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Academic`.`Tb_Usuario` (
+CREATE TABLE IF NOT EXISTS `academic`.`Tb_Usuario` (
   `cpf_usuario` CHAR(11) NOT NULL,
   `nome_usuario` VARCHAR(60) NOT NULL,
   `senha_usuario` VARCHAR(32) NOT NULL,
@@ -40,9 +40,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Academic`.`Tb_Instituicao`
+-- Table `academic`.`Tb_Instituicao`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Academic`.`Tb_Instituicao` (
+CREATE TABLE IF NOT EXISTS `academic`.`Tb_Instituicao` (
   `cnpj_instituicao` CHAR(14) NOT NULL,
   `nome_instituicao` VARCHAR(60) NOT NULL,
   `logotipo_instituicao` VARCHAR(60) NULL,
@@ -60,11 +60,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Academic`.`Tb_Modelo`
+-- Table `academic`.`Tb_Modelo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Academic`.`Tb_Modelo` (
+CREATE TABLE IF NOT EXISTS `academic`.`Tb_Modelo` (
   `codigo_modelo` INT NOT NULL AUTO_INCREMENT,
-  `nome_modelo` VARCHAR(60) NOT NULL,
+  `nome_modelo` VARCHAR(150) NOT NULL,
   `arquivo_modelo` LONGTEXT NOT NULL,
   `dtCriacao_modelo` DATE NOT NULL,
   `descricao_modelo` VARCHAR(255) NULL,
@@ -77,18 +77,18 @@ CREATE TABLE IF NOT EXISTS `Academic`.`Tb_Modelo` (
   INDEX `fk_Tb_Modelo_Tb_Instituicao1_idx` (`Tb_Instituicao_cnpj_instituicao` ASC),
   CONSTRAINT `fk_Tb_Modelo_Tb_Instituicao1`
     FOREIGN KEY (`Tb_Instituicao_cnpj_instituicao`)
-    REFERENCES `Academic`.`Tb_Instituicao` (`cnpj_instituicao`)
+    REFERENCES `academic`.`Tb_Instituicao` (`cnpj_instituicao`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Academic`.`Tb_Trabalho`
+-- Table `academic`.`Tb_Trabalho`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Academic`.`Tb_Trabalho` (
+CREATE TABLE IF NOT EXISTS `academic`.`Tb_Trabalho` (
   `codigo_trabalho` INT NOT NULL AUTO_INCREMENT,
-  `nome_trabalho` VARCHAR(60) NOT NULL,
+  `nome_trabalho` VARCHAR(150) NOT NULL,
   `descricao_trabalho` VARCHAR(255) NULL,
   `arquivo_trabalho` LONGTEXT NOT NULL,
   `finalizado_trabalho` TINYINT NOT NULL DEFAULT 0,
@@ -107,21 +107,21 @@ CREATE TABLE IF NOT EXISTS `Academic`.`Tb_Trabalho` (
   INDEX `fk_Tb_Trabalho_Tb_Instituicao1_idx` (`Tb_Instituicao_cnpj_instituicao` ASC),
   CONSTRAINT `fk_Tb_Trabalho_Tb_Modelo1`
     FOREIGN KEY (`Tb_Modelo_codigo_modelo`)
-    REFERENCES `Academic`.`Tb_Modelo` (`codigo_modelo`)
+    REFERENCES `academic`.`Tb_Modelo` (`codigo_modelo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Tb_Trabalho_Tb_Instituicao1`
     FOREIGN KEY (`Tb_Instituicao_cnpj_instituicao`)
-    REFERENCES `Academic`.`Tb_Instituicao` (`cnpj_instituicao`)
+    REFERENCES `academic`.`Tb_Instituicao` (`cnpj_instituicao`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Academic`.`Desenvolve_Usuario_Trabalho`
+-- Table `academic`.`Desenvolve_Usuario_Trabalho`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Academic`.`Desenvolve_Usuario_Trabalho` (
+CREATE TABLE IF NOT EXISTS `academic`.`Desenvolve_Usuario_Trabalho` (
   `Tb_Usuario_cpf_usuario` CHAR(11) NOT NULL,
   `Tb_Trabalho_codigo_trabalho` INT NOT NULL,
   `cargo_usuario` INT NOT NULL,
@@ -130,21 +130,21 @@ CREATE TABLE IF NOT EXISTS `Academic`.`Desenvolve_Usuario_Trabalho` (
   INDEX `fk_Tb_Usuario_has_Tb_Trabalho_Tb_Usuario_idx` (`Tb_Usuario_cpf_usuario` ASC),
   CONSTRAINT `fk_Tb_Usuario_has_Tb_Trabalho_Tb_Usuario`
     FOREIGN KEY (`Tb_Usuario_cpf_usuario`)
-    REFERENCES `Academic`.`Tb_Usuario` (`cpf_usuario`)
+    REFERENCES `academic`.`Tb_Usuario` (`cpf_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Tb_Usuario_has_Tb_Trabalho_Tb_Trabalho1`
     FOREIGN KEY (`Tb_Trabalho_codigo_trabalho`)
-    REFERENCES `Academic`.`Tb_Trabalho` (`codigo_trabalho`)
+    REFERENCES `academic`.`Tb_Trabalho` (`codigo_trabalho`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Academic`.`Reage_Usuario_Trabalho`
+-- Table `academic`.`Reage_Usuario_Trabalho`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Academic`.`Reage_Usuario_Trabalho` (
+CREATE TABLE IF NOT EXISTS `academic`.`Reage_Usuario_Trabalho` (
   `Tb_Usuario_cpf_usuario` CHAR(11) NOT NULL,
   `Tb_Trabalho_codigo_trabalho` INT NOT NULL,
   PRIMARY KEY (`Tb_Usuario_cpf_usuario`, `Tb_Trabalho_codigo_trabalho`),
@@ -152,21 +152,21 @@ CREATE TABLE IF NOT EXISTS `Academic`.`Reage_Usuario_Trabalho` (
   INDEX `fk_Tb_Usuario_has_Tb_Trabalho_Tb_Usuario1_idx` (`Tb_Usuario_cpf_usuario` ASC),
   CONSTRAINT `fk_Tb_Usuario_has_Tb_Trabalho_Tb_Usuario1`
     FOREIGN KEY (`Tb_Usuario_cpf_usuario`)
-    REFERENCES `Academic`.`Tb_Usuario` (`cpf_usuario`)
+    REFERENCES `academic`.`Tb_Usuario` (`cpf_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Tb_Usuario_has_Tb_Trabalho_Tb_Trabalho2`
     FOREIGN KEY (`Tb_Trabalho_codigo_trabalho`)
-    REFERENCES `Academic`.`Tb_Trabalho` (`codigo_trabalho`)
+    REFERENCES `academic`.`Tb_Trabalho` (`codigo_trabalho`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Academic`.`Adiciona_Usuario_Usuario`
+-- Table `academic`.`Adiciona_Usuario_Usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Academic`.`Adiciona_Usuario_Usuario` (
+CREATE TABLE IF NOT EXISTS `academic`.`Adiciona_Usuario_Usuario` (
   `seguidor_usuario` CHAR(11) NOT NULL,
   `seguido_usuario` CHAR(11) NOT NULL,
   PRIMARY KEY (`seguidor_usuario`, `seguido_usuario`),
@@ -174,21 +174,21 @@ CREATE TABLE IF NOT EXISTS `Academic`.`Adiciona_Usuario_Usuario` (
   INDEX `fk_Tb_Usuario_has_Tb_Usuario_Tb_Usuario1_idx` (`seguidor_usuario` ASC),
   CONSTRAINT `fk_Tb_Usuario_has_Tb_Usuario_Tb_Usuario1`
     FOREIGN KEY (`seguidor_usuario`)
-    REFERENCES `Academic`.`Tb_Usuario` (`cpf_usuario`)
+    REFERENCES `academic`.`Tb_Usuario` (`cpf_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Tb_Usuario_has_Tb_Usuario_Tb_Usuario2`
     FOREIGN KEY (`seguido_usuario`)
-    REFERENCES `Academic`.`Tb_Usuario` (`cpf_usuario`)
+    REFERENCES `academic`.`Tb_Usuario` (`cpf_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Academic`.`Tb_Tag`
+-- Table `academic`.`Tb_Tag`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Academic`.`Tb_Tag` (
+CREATE TABLE IF NOT EXISTS `academic`.`Tb_Tag` (
   `codigo_tag` INT NOT NULL AUTO_INCREMENT,
   `categoria_tag` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`codigo_tag`))
@@ -196,9 +196,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Academic`.`Apresenta_Trabalho_Tag`
+-- Table `academic`.`Apresenta_Trabalho_Tag`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Academic`.`Apresenta_Trabalho_Tag` (
+CREATE TABLE IF NOT EXISTS `academic`.`Apresenta_Trabalho_Tag` (
   `Tb_Trabalho_codigo_trabalho` INT NOT NULL,
   `Tb_Tag_codigo_tag` INT NOT NULL,
   PRIMARY KEY (`Tb_Trabalho_codigo_trabalho`, `Tb_Tag_codigo_tag`),
@@ -206,12 +206,12 @@ CREATE TABLE IF NOT EXISTS `Academic`.`Apresenta_Trabalho_Tag` (
   INDEX `fk_Tb_Trabalho_has_Tb_Tag_Tb_Trabalho1_idx` (`Tb_Trabalho_codigo_trabalho` ASC),
   CONSTRAINT `fk_Tb_Trabalho_has_Tb_Tag_Tb_Trabalho1`
     FOREIGN KEY (`Tb_Trabalho_codigo_trabalho`)
-    REFERENCES `Academic`.`Tb_Trabalho` (`codigo_trabalho`)
+    REFERENCES `academic`.`Tb_Trabalho` (`codigo_trabalho`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Tb_Trabalho_has_Tb_Tag_Tb_Tag1`
     FOREIGN KEY (`Tb_Tag_codigo_tag`)
-    REFERENCES `Academic`.`Tb_Tag` (`codigo_tag`)
+    REFERENCES `academic`.`Tb_Tag` (`codigo_tag`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
