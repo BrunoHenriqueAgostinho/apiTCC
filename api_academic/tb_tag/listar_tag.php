@@ -10,7 +10,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $sql = "SELECT 
                 codigo_tag as codigo, categoria_tag as categoria
             FROM 
-                tb_tag";
+                Tb_Tag";
     $resultado = mysqli_query($conexao, $sql);
     $contador = mysqli_num_rows($resultado);
     if ($contador == 0) {

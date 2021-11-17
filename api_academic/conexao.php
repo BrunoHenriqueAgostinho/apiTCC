@@ -2,9 +2,9 @@
     //academicoetec.mysql.dbaas.com.br caso o ip nao esteja funcionando
     // PARA USAR A CONEXAO COM O SERVIDOR UTILIZE DESCOMENTE ESSA PARTE
     // host far from  home
-    // $host = "201.62.65.6"; 
+    $host = "201.62.65.6"; 
     // host local na escola
-    $host = "172.16.20.100"; 
+    // $host = "172.16.20.100"; 
     
     $user = "academic";
     $password = "Academic@2021";
