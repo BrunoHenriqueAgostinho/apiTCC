@@ -38,7 +38,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $contador = mysqli_num_rows($resultado);
     if ($contador == 0){
         header("HTTP/1.1 500 Erro ao consultar banco");
-        echo json_encode(["erro" => "Não foi possível consultar seus trabalhos."]);
+        //Não foi possível consultar seus trabalhos
+        echo json_encode(["erro" => "Houve um problema ao listar os usuários e seus trabalhos"]);
     } else {
         $dados = $resultado->fetch_all(MYSQLI_ASSOC);
         http_response_code(200);

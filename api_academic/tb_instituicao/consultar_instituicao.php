@@ -32,7 +32,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $contador = mysqli_num_rows($resultado);
     if ($contador == 0) {
         header("HTTP/1.1 500 Erro no SQL");
-        echo json_encode(["erro" => "Erro ao consultar instituição."]);
+        //Erro ao consultar instituição
+        echo json_encode(["erro" => "Houve um problema ao consultar a instiruição"]);
     } else {
         $dados = $resultado->fetch_array(MYSQLI_ASSOC);
         http_response_code(200);

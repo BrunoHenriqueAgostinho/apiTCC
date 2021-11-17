@@ -37,11 +37,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     if ($contador1 == 0){
         header("HTTP/1.1 500 Usuário Inexistente");
-        echo json_encode(["erro" => "Esse usuário não existe."]);
+        //Esse usuário não existe
+        echo json_encode(["erro" => "Houve um problema ao atribuir o trabalho ao usuário"]);
     } else {
         if ($contador2 == 0){
             header("HTTP/1.1 500 Trabalho Inexistente");
-            echo json_encode(["erro" => "Esse trabalho não existe."]);
+            //Esse trabalho não existe
+            echo json_encode(["erro" => "Houve um problema ao atribuir o trabalho ao usuário"]);
         } else {
             $sql3 = "SELECT 
                         * 
@@ -62,11 +64,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     echo json_encode(["mensagem" => "Relação de desenvolvimento inserida com sucesso."]);
                 } else {
                     header("HTTP/1.1 500 Erro no SQL");
-                    echo json_encode(["erro" => "Erro ao inserir relação de desenvolvimento."]);
+                    //Erro ao inserir relação de desenvolvimento
+                    echo json_encode(["erro" => "Houve um problema ao atribuir o trabalho ao usuário"]);
                 }
             } else {
                 header("HTTP/1.1 500 Relação de desenvolvimento existente");
-                echo json_encode(["erro" => "Relação de desenvolvimento já existe."]);
+                //Relação de desenvolvimento já existe
+                echo json_encode(["erro" => "Houve um problema ao atribuir o trabalho ao usuário"]);
             }
         }
     }

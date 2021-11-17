@@ -12,7 +12,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $sql = "SELECT 
                 count(codigo_modelo) as instituicao
             FROM 
-                Tb_Modelo 
+                tb_modelo 
             WHERE
                 Tb_Instituicao_cnpj_instituicao = '$cnpj' and codigo_modelo = $codigo";
     $resultado = mysqli_query($conexao, $sql);

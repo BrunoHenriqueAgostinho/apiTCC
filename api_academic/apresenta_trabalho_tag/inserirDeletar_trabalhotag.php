@@ -19,7 +19,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $contador1 = mysqli_num_rows($resultado1);
     if ($contador1 == 0){
         header("HTTP/1.1 500 Registro inexistente");
-        echo json_encode(["erro" => "Esse trabalho não existe."]);
+        //Esse trabalho não existe.
+        echo json_encode(["erro" => "Houve um problema ao inserir ou deletar uma tag do trabalho"]);
     } else {
         $sql2 = "SELECT 
                     *
@@ -31,7 +32,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $contador2 = mysqli_num_rows($resultado2);
         if ($contador2 == 0){
             header("HTTP/1.1 500 Registro inexistente");
-            echo json_encode(["erro" => "Essa tag não existe."]);
+            //Essa tag não existe
+            echo json_encode(["erro" => "Houve um problema ao inserir ou deletar uma tag do trabalho"]);
         } else {
             $sql3 = "SELECT
                         *
@@ -52,7 +54,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     echo json_encode(["mensagem" => "Tag inserida com sucesso ao trabalho."]);
                 } else {
                     header("HTTP/1.1 500 Erro no SQL");
-                    echo json_encode(["erro" => "Erro ao inserir tag ao trabalho."]);
+                    //Erro ao inserir tag ao trabalho
+                    echo json_encode(["erro" => "Houve um problema ao inserir ou deletar uma tag do trabalho"]);
                 }
             } else {
                 $sql2 = "DELETE FROM Apresenta_Trabalho_Tag WHERE Tb_Trabalho_codigo_trabalho = $codigo AND Tb_Tag_codigo_tag = $tag";
@@ -63,7 +66,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     echo json_encode($dados);
                 } else {
                     header("HTTP/1.1 500 Erro no SQL");
-                    echo json_encode(["erro" => "Erro ao deletar tag do trabalho."]);
+                    //Erro ao deletar tag do trabalho
+                    echo json_encode(["erro" => "Houve um problema ao inserir ou deletar uma tag do trabalho"]);
                 }
             }
         }

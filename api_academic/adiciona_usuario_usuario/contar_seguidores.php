@@ -18,7 +18,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $contador = mysqli_num_rows($resultado1);
     if ($contador == 0) {
         header("HTTP/1.1 500 Erro no SQL");
-        echo json_encode(["erro" => "Erro ao consultar usuário."]);
+        //Erro ao consultar usuário
+        echo json_encode(["erro" => "Houve um problema ao contar o número de seguidores"]);
     } else {
         $sql2 = "SELECT
                     count(seguidor_usuario) as seguidores 
@@ -34,7 +35,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             echo json_encode(["mensagem" => $seguidores]);
         } else {
             header("HTTP/1.1 500 Erro no SQL");
-            echo json_encode(["erro" => "Erro ao consultar seguidores."]);
+            //Erro ao consultar seguidores
+            echo json_encode(["erro" => "Houve um problema ao contar o número de seguidores"]);
         }
     }
 }

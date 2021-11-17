@@ -48,15 +48,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 echo json_encode(["mensagem" => "Instituição cadastrada com sucesso."]);
             } catch (PDOException $e){
                 header("HTTP/1.1 500 Erro no SQL");
-                echo json_encode(["erro" => "Não foi possível realizar o cadastro da instituição."]);
+                //Não foi possível realizar o cadastro da instituição
+                echo json_encode(["erro" => "Houve um problema ao inserir a instituição"]);
             }
         } else {
             header("HTTP/1.1 500 Erro no SQL");
-            echo json_encode(["erro" => "Não foi possível realizar o cadastro da instituição."]);
+            //Não foi possível realizar o cadastro da instituição
+            echo json_encode(["erro" => "Houve um problema ao inserir a instituição"]);
         }
     } else{
         header("HTTP/1.1 500 CNPJ inválido");
-        echo json_encode(["erro" => "CNPJ inválido."]);
+        //CNPJ inválido
+        echo json_encode(["erro" => "Houve um problema ao inserir a instituição"]);
     }
 }
 /*

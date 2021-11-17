@@ -1,0 +1,28 @@
+"Houve um problema ao contar o número de seguidores"
+"Houve um problema ao contar o número de pessoas que segue"
+"Houve um problema ao criar a lista de pessoas que segue"
+
+"Houve um problema ao inserir ou deletar uma tag do trabalho"
+
+"Houve um problema ao atribuir o trabalho ao usuário"
+"Houve um problema ao consultar se o usuario desenvolve o trabalho"
+"Houve um problema ao listar os usuários e seus trabalhos"
+"Houve um problema ao consultar os integrantes do trabalho"
+"Houve um problema ao alterar o tipo de cargo do integrante"
+"Houve um problema ao retirar o integrante do trabalho"
+
+"Houve um problema ao consultar a instiruição"
+"Houve um problema ao inserir a instituição"
+"Houve um problema ao alterar as informações da instituição"
+
+"E-mail ou senha inválidos"
+
+"Houve um problema ao consultar o modelo de trabalho"
+
+Parei aqui - Modelo.service
+"Houve um problema ao consultar a instituição do modelo"
+"Houve um problema ao fazer a listagem de modelos"
+"Houve um problema ao fazer a listagem de modelos pela instituição"
+"Houve um problema ao inserir o modelo"
+"Houve um problema ao alterar as informações do modelo"
+"Houve um problema ao deletar o modelo"

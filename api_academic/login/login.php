@@ -24,6 +24,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $resultado2 = $sql2->fetch(PDO::FETCH_ASSOC);
         if(empty($resultado2)){
             header("HTTP/1.1 500 Erro no Login");
+            //E-mail ou senha inválidos
             echo json_encode(["erro" => "Email ou senha inválidos."]);
         } else {
             http_response_code(200);

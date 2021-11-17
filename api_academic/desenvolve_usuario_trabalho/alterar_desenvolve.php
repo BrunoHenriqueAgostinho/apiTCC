@@ -30,7 +30,8 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
 
     if ($contador1 == 0){
         header("HTTP/1.1 500 Relação de desenvolvimento inexistente");
-        echo json_encode(["erro" => "Não existe essa relação de desenvolvimento."]);
+        //Não existe essa relação de desenvolvimento
+        echo json_encode(["erro" => "Houve um problema ao alterar o tipo de cargo do integrante"]);
     } else {
         $sql2 = "UPDATE Desenvolve_Usuario_Trabalho 
                     SET  
@@ -45,7 +46,8 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
             echo json_encode(["mensagem" => "Relação de desenvolvimento alterado com sucesso."]);
         } else {
             header("HTTP/1.1 500 Erro no SQL");
-            echo json_encode(["erro" => "Erro ao alterar relação de desenvolvimento."]);
+            //Erro ao alterar relação de desenvolvimento
+            echo json_encode(["erro" => "Houve um problema ao alterar o tipo de cargo do integrante"]);
         }
     }
 }

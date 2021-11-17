@@ -23,7 +23,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $contador = mysqli_num_rows($resultado1);
     if ($contador == 0) {
         header("HTTP/1.1 500 Erro no SQL");
-        echo json_encode(["erro" => "Erro ao consultar usuário."]);
+        //Erro ao consultar usuário
+        echo json_encode(["erro" => "Houve um problema ao criar a lista de pessoas que segue."]);
     } else {
         $sql2 = "SELECT 
                     seguidor_usuario as seguidor,
@@ -39,7 +40,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             echo json_encode($dados, JSON_UNESCAPED_UNICODE);
         } else {
             header("HTTP/1.1 500 Erro no SQL");
-            echo json_encode(["erro" => "Erro SQL: " . $conexao->error]);
+            //Erro ao listar seguidor
+            //echo json_encode(["erro" => "Erro SQL: " . $conexao->error]);
+            echo json_encode(["erro" => "Houve um problema ao criar a lista de pessoas que segue."]);
         }
     }
 }
