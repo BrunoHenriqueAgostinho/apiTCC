@@ -50,7 +50,7 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
                         margemBaixo_modelo = '$margemBaixo', 
                         descricao_modelo = '$descricao'
                     WHERE 
-                        codigo_modelo = ".$codigo;
+                        codigo_modelo = $codigo";
         $resultado2 = mysqli_query($conexao, $sql2);
         if ($resultado2) {
             http_response_code(201);
