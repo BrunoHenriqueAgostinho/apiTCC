@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
         }
     } else {
         header("HTTP/1.1 500 Erro no SQL");
-        echo json_encode(["erro" => "Erro SQL: " . $conexao->error]);
+        echo json_encode(["erro" => "Houve um problema ao listar os trabalhos finalizados"]);
     }
 }
 ?>

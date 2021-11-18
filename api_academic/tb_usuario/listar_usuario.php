@@ -15,6 +15,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     if($pesquisa == ''){
         header("HTTP/1.1 500 Nenhum valor informado");
+        //Nenhum valor informado.
         echo json_encode(["erro" => "Nenhum valor informado."]);
     } else {
         $pesquisa = "'%$pesquisa%'";
@@ -48,7 +49,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
         } else {
             header("HTTP/1.1 500 Sem retorno");
-            echo json_encode(["erro" => "Nada foi encontrado."]);
+            //Nada foi encontrado.
+            echo json_encode(["erro" => "Houve um problema ao listar os usuários"]);
         }
     }
     

@@ -29,12 +29,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             echo json_encode($dados);
         } else {
             header("HTTP/1.1 500 Erro no SQL");
-            echo json_encode(["erro" => mysqli_error($conexao)]);
             //"Erro ao deletar modelo."
+            echo json_encode(["erro" => "Houve um problema ao deletar o modelo"]);
         }
     } else {
         header("HTTP/1.1 500 Registro inexistente.");
-        echo json_encode(["erro" => "Esse modelo não existe."]);
+        //Esse modelo não existe
+        echo json_encode(["erro" => "Houve um problema ao deletar o modelo"]);
     }
 }
 ?>

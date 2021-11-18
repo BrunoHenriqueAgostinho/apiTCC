@@ -18,11 +18,33 @@
 "E-mail ou senha inválidos"
 
 "Houve um problema ao consultar o modelo de trabalho"
-
-Parei aqui - Modelo.service
 "Houve um problema ao consultar a instituição do modelo"
 "Houve um problema ao fazer a listagem de modelos"
 "Houve um problema ao fazer a listagem de modelos pela instituição"
 "Houve um problema ao inserir o modelo"
 "Houve um problema ao alterar as informações do modelo"
 "Houve um problema ao deletar o modelo"
+
+"Houve um problema ao listar as tags de trabalho"
+"Houve um problema ao consultar as tags de trabalho"
+
+"Houve um problema ao consultar o trabalho"
+"Houve um problema ao inserir o trabalho"
+"Houve um problema ao alterar o trabalho"
+"Houve um problema ao publicar o trabalho"
+"Houve um problema ao pesquisar os trabalhos finalizados"
+"Houve um problema ao listar os trabalhos finalizados"
+"Houve um problema ao listar os seus trabalhos"
+	"Houve um problema ao excluir o trabalho"
+	"Houve um problema buscar seu trabalho"
+	"Houve um problema ao excluir o trabalho"
+	"Houve um problema ao excluir as tags do trabalho"
+	"Houve um problema ao excluir as reações do trabalho"
+	"Houve um problema ao excluir os participantes do trabalho"
+
+"Houve um problema ao consultar o usuário"
+"Houve um problema ao inserir o usuário"
+	"Houve um problema ao cadastrar CPF"
+"Houve um problema ao listar os usuários"
+	"Nenhum valor informado."
+"Houve um problema ao alterar o usuário"

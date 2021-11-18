@@ -61,15 +61,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 
             } catch (PDOException $e){
                 header("HTTP/1.1 500 Erro no SQL");
-                echo json_encode(["erro" => "Não foi possível realizar o cadastro do usuário."]);
+                echo json_encode(["erro" => "Houve um problema ao inserir o usuário"]);
             }
         } else {
             header("HTTP/1.1 500 Erro no SQL");
-            echo json_encode(["erro" => "Não foi possível realizar o cadastro do usuário."]);
+            echo json_encode(["erro" => "Houve um problema ao inserir o usuário"]);
         }
     }else{
         header("HTTP/1.1 500 CPF inválido");
-        echo json_encode(["erro" => "CPF inválido."]);
+        //CPF inválido.
+        echo json_encode(["erro" => "Houve um problema ao cadastrar CPF"]);
     }
 }
 

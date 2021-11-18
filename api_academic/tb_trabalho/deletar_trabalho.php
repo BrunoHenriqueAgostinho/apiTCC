@@ -19,7 +19,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $contador = mysqli_num_rows($resultado1);
     if ($contador == 0) {
         header("HTTP/1.1 500 Registro inexistente.");
-        echo json_encode(["erro" => "Esse trabalho não existe."]);
+        echo json_encode(["erro" => "Houve um problema buscar seu trabalho"]);
     } else {
         //Delete tb_desenvolve - Trabalho
         $sql2  = "DELETE FROM
@@ -58,19 +58,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         echo json_encode($dados);
                     } else {
                         header("HTTP/1.1 500 Erro no SQL");
-                        echo json_encode(["erro" => "Erro SQL: " . $conexao->error]);
+                        echo json_encode(["erro" => "Houve um problema ao excluir o trabalho"]);
                     }
                 } else {
                     header("HTTP/1.1 500 Erro no SQL");
-                    echo json_encode(["erro" => "Erro SQL: " . $conexao->error]);
+                    echo json_encode(["erro" => "Houve um problema ao excluir as tags do trabalho"]);
                 }
             } else {
                 header("HTTP/1.1 500 Erro no SQL");
-                echo json_encode(["erro" => "Erro SQL: " . $conexao->error]);
+                echo json_encode(["erro" => "Houve um problema ao excluir as reações do trabalho"]);
             }
         } else {
             header("HTTP/1.1 500 Erro no SQL");
-            echo json_encode(["erro" => "Erro SQL: " . $conexao->error]);
+            echo json_encode(["erro" => "Houve um problema ao excluir os participantes do trabalho"]);
         }
     } 
 }

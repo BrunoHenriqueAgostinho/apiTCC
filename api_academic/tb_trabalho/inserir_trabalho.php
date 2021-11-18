@@ -74,7 +74,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         echo json_encode(["codigo" => $codigo]);
     } else {
         header("HTTP/1.1 500 Erro no SQL");
-        echo json_encode(["erro" => "Erro ao criar trabalho."]);
+        //Erro ao criar trabalho
+        echo json_encode(["erro" => "Houve um problema ao inserir o trabalho"]);
     }
 }
 

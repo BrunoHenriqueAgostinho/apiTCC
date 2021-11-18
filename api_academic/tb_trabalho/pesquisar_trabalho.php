@@ -40,7 +40,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             echo json_encode($dados, JSON_UNESCAPED_UNICODE);
         } else {
             header("HTTP/1.1 500 Erro no SQL");
-            echo json_encode(["erro" => "Nenhum resultado encontrado."]);
+            echo json_encode(["erro" => "Houve um problema ao pesquisar os trabalhos finalizados"]);
         }
     }
 }

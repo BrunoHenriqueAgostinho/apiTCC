@@ -36,7 +36,8 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
     $contador1 = mysqli_num_rows($resultado1);
     if ($contador1 == 0){
         header("HTTP/1.1 500 Registro inexistente.");
-        echo json_encode(["erro" => "Esse modelo não existe."]);
+        //Esse modelo não existe
+        echo json_encode(["erro" => "Houve um problema ao alterar as informações do modelo"]);
     } else {
         $sql2 = "UPDATE Tb_Modelo 
                     SET  
@@ -56,7 +57,8 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
             echo json_encode(["mensagem" => "Modelo alterado com sucesso."]);
         } else {
             header("HTTP/1.1 500 Erro no SQL");
-            echo json_encode(["erro" => "Erro ao alterar modelo."]);
+            //Erro ao alterar modelo
+            echo json_encode(["erro" => "Houve um problema ao alterar as informações do modelo"]);
         }
     }
 }

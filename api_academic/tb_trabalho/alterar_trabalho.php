@@ -39,7 +39,8 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
     $contador = mysqli_num_rows($resultado1);
     if ($contador == 0) {
         header("HTTP/1.1 500 Registro inexistente.");
-        echo json_encode(["erro" => "Esse trabalho não existe."]);
+        //Esse trabalho não existe
+        echo json_encode(["erro" => "Houve um problema ao alterar o trabalho"]);
     } else {
         if(empty($cnpj) && empty($avaliacao)){
             $sql2 = "UPDATE 
@@ -99,7 +100,8 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
             echo json_encode($data);
         } else {
             header("HTTP/1.1 500 Erro no SQL");
-            $data = ["erro"=> mysqli_error($conexao)];
+            //Erro ao alterar o trabalho
+            $data = ["erro"=> "Houve um problema ao alterar o trabalho"];
             echo json_encode($data);
         }
     }

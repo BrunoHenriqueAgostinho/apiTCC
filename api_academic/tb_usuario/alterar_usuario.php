@@ -57,7 +57,8 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
         echo json_encode($dados);
     } else {
         header("HTTP/1.1 500 Erro no SQL");
-        $dados = ["erro"=> "Erro ao alterar dados do usuário."];
+        //Erro ao alterar dados do usuário.
+        $dados = ["erro"=> "Houve um problema ao alterar o usuário"];
         echo json_encode($dados);
     }
 }

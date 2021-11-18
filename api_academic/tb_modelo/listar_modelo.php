@@ -14,7 +14,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     if ($contador1 == 0){
         header("HTTP/1.1 500 Registro inexistente.");
-        echo json_encode(["erro" => "Não encontramos essa instituição."]);
+        //Não encontramos essa instituição
+        echo json_encode(["erro" => "Houve um problema ao fazer a listagem de modelos"]);
     } else {
         $dados1 = mysqli_fetch_array($resultado1);
         $codigo = $dados1["cnpj_instituicao"];
@@ -42,7 +43,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             echo json_encode($dados2, JSON_UNESCAPED_UNICODE);
         } else {
             header("HTTP/1.1 500 Erro no SQL");
-            echo json_encode(["erro" => "Erro ao listar modelos."]);
+            //Erro ao listar modelos
+            echo json_encode(["erro" => "Houve um problema ao fazer a listagem de modelos"]);
         }
         
     }

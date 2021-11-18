@@ -55,7 +55,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         echo json_encode(["mensagem" => "Modelo inserido com Sucesso"]);
     } else {
         header("HTTP/1.1 500 Erro no SQL");
-        echo json_encode(["erro" => "Erro ao inserir modelo."]);
+        //Erro ao inserir modelo
+        echo json_encode(["erro" => "Houve um problema ao inserir o modelo"]);
     }
 }
 ?>

@@ -38,7 +38,7 @@ if($_SERVER["REQUEST_METHOD"] == "PUT"){
             echo json_encode($data);
         } else {
             header("HTTP/1.1 500 Erro no SQL");
-            $data = ["erro"=> mysqli_error($conexao)];
+            $data = ["erro"=> "Houve um problema ao publicar o trabalho"];
             echo json_encode($data);
         }
     }

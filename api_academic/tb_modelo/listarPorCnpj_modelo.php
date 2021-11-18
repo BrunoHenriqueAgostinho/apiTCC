@@ -18,7 +18,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $contador1 = mysqli_num_rows($resultado1);
     if ($contador1 == 0){
         header("HTTP/1.1 500 Registro inexistente.");
-        echo json_encode(["erro" => "Não encontramos essa instituição."]);
+        //Não encontramos essa instituição
+        echo json_encode(["erro" => "Houve um problema ao fazer a listagem de modelos pela instituição"]);
     } else {
         $sql2 = "SELECT 
                     codigo_modelo as codigo, 
@@ -42,7 +43,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             echo json_encode($dados, JSON_UNESCAPED_UNICODE);
         } else {
             header("HTTP/1.1 500 Erro no SQL");
-            echo json_encode(["erro" => "Erro ao listar modelos."]);
+            //Erro ao listar modelos
+            echo json_encode(["erro" => "Houve um problema ao fazer a listagem de modelos pela instituição"]);
         }
     }
 
