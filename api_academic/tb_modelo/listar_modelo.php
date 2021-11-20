@@ -23,7 +23,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 FROM 
                     Tb_Modelo 
                 WHERE
-                    Tb_Instituicao_cnpj_instituicao == null";
+                    Tb_Instituicao_cnpj_instituicao == null
+                OR
+                    Tb_Instituicao_cnpj_instituicao == ''";
                         
         $resultado3 = mysqli_query($conexao, $sql3);
         if ($resultado3) {
