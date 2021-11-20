@@ -8,36 +8,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $deco = json_decode($json);
     $pesquisa = $deco->pesquisa;
 
-    if($pesquisa == null || $pesquisa == ""){
-        $sql3 = "SELECT 
-                    codigo_modelo as codigo, 
-                    nome_modelo as nome, 
-                    arquivo_modelo as arquivo, 
-                    margemDireita_modelo as margemDireita, 
-                    margemEsquerda_modelo as margemEsquerda, 
-                    margemTopo_modelo as margemTopo, 
-                    margemBaixo_modelo as margemBaixo, 
-                    dtCriacao_modelo as dtCriacao, 
-                    descricao_modelo as descricao, 
-                    Tb_instituicao_cnpj_instituicao as cnpj 
-                FROM 
-                    Tb_Modelo 
-                WHERE
-                    Tb_Instituicao_cnpj_instituicao = null
-                OR
-                    Tb_Instituicao_cnpj_instituicao = ''";
-                        
-        $resultado3 = mysqli_query($conexao, $sql3);
-        if ($resultado3) {
-            $dados3 = $resultado3->fetch_all(MYSQLI_ASSOC);
-            http_response_code(200);
-            echo json_encode($dados3, JSON_UNESCAPED_UNICODE);
-        } else {
-            header("HTTP/1.1 500 Erro no SQL");
-            //Erro ao listar modelos
-            echo json_encode(["erro" => "Houve um problema ao fazer a listagem de modelos"]);
-        }
-    } else {
+    if(!empty($pesquisa)){
         $sql1 = "SELECT * FROM Tb_Instituicao WHERE nome_instituicao like '%$pesquisa%'";
         $resultado1 = mysqli_query($conexao, $sql1);
         $contador1 = mysqli_num_rows($resultado1);
@@ -76,6 +47,35 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 //Erro ao listar modelos
                 echo json_encode(["erro" => "Houve um problema ao fazer a listagem de modelos"]);
             }
+        }
+    } else {
+        $sql3 = "SELECT 
+                    codigo_modelo as codigo, 
+                    nome_modelo as nome, 
+                    arquivo_modelo as arquivo, 
+                    margemDireita_modelo as margemDireita, 
+                    margemEsquerda_modelo as margemEsquerda, 
+                    margemTopo_modelo as margemTopo, 
+                    margemBaixo_modelo as margemBaixo, 
+                    dtCriacao_modelo as dtCriacao, 
+                    descricao_modelo as descricao, 
+                    Tb_instituicao_cnpj_instituicao as cnpj 
+                FROM 
+                    Tb_Modelo 
+                WHERE
+                    Tb_Instituicao_cnpj_instituicao = null
+                OR
+                    Tb_Instituicao_cnpj_instituicao = ''";
+                        
+        $resultado3 = mysqli_query($conexao, $sql3);
+        if ($resultado3) {
+            $dados3 = $resultado3->fetch_all(MYSQLI_ASSOC);
+            http_response_code(200);
+            echo json_encode($dados3, JSON_UNESCAPED_UNICODE);
+        } else {
+            header("HTTP/1.1 500 Erro no SQL");
+            //Erro ao listar modelos
+            echo json_encode(["erro" => "Houve um problema ao fazer a listagem de modelos"]);
         }
     }
 } 
