@@ -61,11 +61,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     descricao_modelo as descricao, 
                     Tb_instituicao_cnpj_instituicao as cnpj 
                 FROM 
-                    Tb_Modelo 
-                WHERE
-                    Tb_Instituicao_cnpj_instituicao = null
-                OR
-                    Tb_Instituicao_cnpj_instituicao = ''";
+                    Tb_Modelo";
                         
         $resultado3 = mysqli_query($conexao, $sql3);
         if ($resultado3) {
